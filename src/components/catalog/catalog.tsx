@@ -1,8 +1,13 @@
+import { useAppSelector } from '../../hooks';
+import { getCameras } from '../../store/catalog/catalog.selectors';
 import CatalogFilter from '../catalog-filter/catalog-filter';
 import CatalogSort from '../catalog-sort/catalog-sort';
 import ProductCard from '../product-card/product-card';
 
 function Catalog(): JSX.Element {
+  const cameras = useAppSelector(getCameras);
+
+
   return (
     <section className="catalog">
       <div className="container">
@@ -14,7 +19,9 @@ function Catalog(): JSX.Element {
           <div className="catalog__content">
             <CatalogSort />
             <div className="cards catalog__cards">
-              <ProductCard />
+              { cameras.map((camera) =>
+                <ProductCard key={camera.id} camera={camera} />
+              ) }
             </div>
             <div className="pagination">
               <ul className="pagination__list">

@@ -1,10 +1,19 @@
-function ProductCard(): JSX.Element {
+import { Link, generatePath } from 'react-router-dom';
+import { Product } from '../../types/product-camera-type';
+import { AppRoute } from '../../utils/const';
+
+export type ProductCardProps = {
+  camera: Product;
+}
+
+function ProductCard({camera}: ProductCardProps): JSX.Element {
+  const { previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, rating, price, id} = camera;
   return (
     <div className="product-card">
       <div className="product-card__img">
         <picture>
-          <source type="image/webp" srcSet="img/content/das-auge.webp, img/content/das-auge@2x.webp 2x" />
-          <img src="img/content/das-auge.jpg" srcSet="img/content/das-auge@2x.jpg 2x" width="280" height="240" alt="Ретрокамера «Das Auge IV»" />
+          <source type="image/webp" srcSet={`${previewImgWebp}, ${previewImgWebp2x} 2x`}/>
+          <img src={previewImg} srcSet={previewImg2x} width="280" height="240" alt={name} />
         </picture>
       </div>
       <div className="product-card__info">
@@ -24,18 +33,20 @@ function ProductCard(): JSX.Element {
           <svg width="17" height="16" aria-hidden="true">
             <use xlinkHref="#icon-star"></use>
           </svg>
-          <p className="visually-hidden">Рейтинг: 3</p>
-          <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>23</p>
+          <p className="visually-hidden">Рейтинг: {rating}</p>
+          <p className="rate__count">
+            <span className="visually-hidden">Всего оценок:</span>{rating}
+          </p>
         </div>
-        <p className="product-card__title">Ретрокамера Das Auge IV</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>73 450 ₽
+        <p className="product-card__title">{name}</p>
+        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price} ₽
         </p>
       </div>
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <a className="btn btn--transparent" href="#">Подробнее
-        </a>
+        <Link to={generatePath(AppRoute.Product, { id: id.toString() })} className="btn btn--transparent">Подробнее
+        </Link>
       </div>
     </div>
   );
