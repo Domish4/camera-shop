@@ -3,15 +3,18 @@ import { Review } from '../types/product-camera-type';
 export enum NameSpace {
   Camera = 'CAMERA',
   Promo = 'PROMO',
+  Catalog = 'CATALOG',
   Reviews = 'REVIEW',
   Coupon = 'COUPON',
   Order = 'ORDER',
   Notification = 'NOTIFICATION',
-  Filter = 'FILTER'
+  Filter = 'FILTER',
+
 }
 
 export enum AppRoute {
-    Catalog = '/cameras',
+    Main = '/',
+    Catalog = '/catalog/:page',
     Product = '/cameras/:id',
     Similar = '/cameras/:cameraId/similar',
     Promo = '/promo',
@@ -19,6 +22,16 @@ export enum AppRoute {
     AddReview = '/reviews',
     Coupon = '/coupons',
     Order = '/orders',
+}
+
+export enum APIRoute {
+  Cameras = '/cameras',
+  Product = '/cameras/:cameraId',
+  Similar = '/similar',
+  Promo = '/promo',
+  Reviews = '/reviews',
+  Coupon = '/coupons',
+  Order = '/orders'
 }
 
 export const getAverageRate = (reviews: Review[]): number => {
@@ -33,3 +46,5 @@ export enum Status {
     Success = 'success',
     Error = 'error'
   }
+
+export const MAX_CAMERAS_CARD = 9;

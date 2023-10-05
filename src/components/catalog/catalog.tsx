@@ -1,12 +1,25 @@
 import { useAppSelector } from '../../hooks';
 import { getCameras } from '../../store/catalog/catalog.selectors';
+import { MAX_CAMERAS_CARD } from '../../utils/const';
 import CatalogFilter from '../catalog-filter/catalog-filter';
 import CatalogSort from '../catalog-sort/catalog-sort';
+import Pagination from '../pagination/pagination';
 import ProductCard from '../product-card/product-card';
+import { useParams } from 'react-router-dom';
+import Loader from '../loader/loader';
 
 function Catalog(): JSX.Element {
   const cameras = useAppSelector(getCameras);
+  const param = useParams().page;
+  const currentPage = Number(param?.replace(/[^\d]/g, ''));
+  const pageCount = Math.ceil(cameras.length / MAX_CAMERAS_CARD);
+  const renderedCameras = cameras.slice((currentPage - 1) * MAX_CAMERAS_CARD, currentPage * MAX_CAMERAS_CARD);
 
+  if (!cameras || !renderedCameras) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <section className="catalog">
@@ -19,22 +32,11 @@ function Catalog(): JSX.Element {
           <div className="catalog__content">
             <CatalogSort />
             <div className="cards catalog__cards">
-              { cameras.map((camera) =>
+              { renderedCameras.map((camera) =>
                 <ProductCard key={camera.id} camera={camera} />
               ) }
             </div>
-            <div className="pagination">
-              <ul className="pagination__list">
-                <li className="pagination__item"><a className="pagination__link pagination__link--active" href="1">1</a>
-                </li>
-                <li className="pagination__item"><a className="pagination__link" href="2">2</a>
-                </li>
-                <li className="pagination__item"><a className="pagination__link" href="3">3</a>
-                </li>
-                <li className="pagination__item"><a className="pagination__link pagination__link--text" href="2">Далее</a>
-                </li>
-              </ul>
-            </div>
+            {pageCount > 1 && <Pagination currentPage={currentPage} pageCount={pageCount} />}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ function SimularCards(): JSX.Element {
         <h2 className="title title--h3">Похожие товары</h2>
         <div className="product-similar__slider">
           <div className="product-similar__slider-list">
-            <ProductCard />
+            
           </div>
 
           <button className="slider-controls slider-controls--prev" type="button" aria-label="Предыдущий слайд" disabled>

@@ -20,8 +20,8 @@ function Banner(): JSX.Element {
         <SwiperSlide key={slideContent.id} virtualIndex={index}>
           <div className="banner">
             <picture>
-              <source type="image/webp" srcSet={`${slideContent.previewImgWebp}, ${slideContent.previewImgWebp2x} 2x`} />
-              <img src={`${slideContent.previewImg}`} srcSet={`${slideContent.previewImg2x} 2x`} width="1280" height="280" alt="баннер" />
+              <source type="image/webp" srcSet={`/${slideContent.previewImgWebp}, /${slideContent.previewImgWebp2x} 2x`} />
+              <img src={`/${slideContent.previewImg}`} srcSet={`/${slideContent.previewImg2x} 2x`} width="1280" height="280" alt="баннер" />
             </picture>
             <p className="banner__info">
               <span className="banner__message">Новинка!</span>
