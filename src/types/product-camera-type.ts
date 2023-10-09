@@ -3,6 +3,7 @@ id: number;
 name: string;
 vendorCode: string;
 type: string;
+category: string;
 description: string;
 level: string;
 price: number;

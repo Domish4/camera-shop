@@ -1,4 +1,4 @@
-import { Product } from "../../types/product-camera-type";
+import { Product } from '../../types/product-camera-type';
 
 export type AddItemProps = {
     onClosePopup: () => void;
@@ -6,7 +6,7 @@ export type AddItemProps = {
 }
 
 function AddItem({onClosePopup, camera}: AddItemProps): JSX.Element {
-const {previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, vendorCode, type, level, price} = camera;
+  const {previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, vendorCode, type, level, price} = camera;
 
   return (
     <div className="modal is-active">

@@ -1,23 +1,27 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductTabs from '../../components/product-tabs/product-tabs';
 import ReviewBlock from '../../components/review-block/review-block';
-import SimularCards from '../../components/simular-cards/simular-cards';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getCameraAction } from '../../store/api-actions';
+import { getCameraAction, getSimilarProductsAction } from '../../store/api-actions';
 import { getCamera } from '../../store/camera/camera.selectors';
 import Loader from '../../components/loader/loader';
+import { AppRoute } from '../../utils/const';
+import { getSimilarCameras } from '../../store/similar-camera/similar-camera.selectors';
+import SimilarCards from '../../components/similar-cards/similar-cards';
 
 function ProductCardPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const id = useParams().id;
   const cameraId = String(id);
   const camera = useAppSelector(getCamera);
+  const similarCameras = useAppSelector(getSimilarCameras);
 
   useEffect(() => {
     dispatch(getCameraAction(cameraId));
+    dispatch(getSimilarProductsAction(cameraId));
   }, [dispatch, cameraId]);
 
   if (!camera) {
@@ -42,11 +46,11 @@ function ProductCardPage(): JSX.Element {
                   </a>
                 </li>
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link" href="catalog.html">Каталог
+                  <Link to={AppRoute.Main} className="breadcrumbs__link">Каталог
                     <svg width="5" height="8" aria-hidden="true">
                       <use xlinkHref="#icon-arrow-mini"></use>
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <span className="breadcrumbs__link breadcrumbs__link--active">{name}</span>
@@ -90,13 +94,13 @@ function ProductCardPage(): JSX.Element {
                       <use xlinkHref="#icon-add-basket"></use>
                     </svg>Добавить в корзину
                   </button>
-                  <ProductTabs />
+                  <ProductTabs camera={camera} />
                 </div>
               </div>
             </section>
           </div>
           <div className="page-content__section">
-            <SimularCards />
+            <SimilarCards similarCameras={similarCameras}/>
           </div>
           <div className="page-content__section">
             <ReviewBlock />

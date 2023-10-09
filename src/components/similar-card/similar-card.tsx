@@ -3,16 +3,13 @@ import { Product } from '../../types/product-camera-type';
 import { AppRoute } from '../../utils/const';
 import AddItem from '../add-item/add-item';
 import { useState } from 'react';
-import { CSSProperties } from 'react';
-
 
 export type ProductCardProps = {
   camera: Product;
-  style?: CSSProperties;
 }
 
-function ProductCard({camera, style}: ProductCardProps): JSX.Element {
-  const { previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, rating, price, id, reviewCount} = camera;
+function SimilarCard({camera}: ProductCardProps): JSX.Element {
+  const { previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, rating, price, id} = camera;
   const [openPopup, setOpenPopup] = useState(false);
 
   const onClosePopup = () => {
@@ -21,7 +18,7 @@ function ProductCard({camera, style}: ProductCardProps): JSX.Element {
   };
 
   return (
-    <div className="product-card" style={style}>
+    <div className="product-card">
       <div className="product-card__img">
         <picture>
           <source type="image/webp" srcSet={`/${previewImgWebp}, /${previewImgWebp2x} 2x`}/>
@@ -47,7 +44,7 @@ function ProductCard({camera, style}: ProductCardProps): JSX.Element {
           </svg>
           <p className="visually-hidden">Рейтинг: {rating}</p>
           <p className="rate__count">
-            <span className="visually-hidden">Всего оценок:</span>{reviewCount}
+            <span className="visually-hidden">Всего оценок:</span>{rating}
           </p>
         </div>
         <p className="product-card__title">{name}</p>
@@ -66,4 +63,4 @@ function ProductCard({camera, style}: ProductCardProps): JSX.Element {
   );
 }
 
-export default ProductCard;
+export default SimilarCard;

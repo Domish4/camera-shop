@@ -9,8 +9,12 @@ export enum NameSpace {
   Order = 'ORDER',
   Notification = 'NOTIFICATION',
   Filter = 'FILTER',
+  Similar = 'SIMILAR'
 
 }
+
+export const tabNames = ['Характеристики', 'Описание'] as const;
+
 
 export enum AppRoute {
     Main = '/',
@@ -27,7 +31,7 @@ export enum AppRoute {
 export enum APIRoute {
   Cameras = '/cameras',
   Product = '/cameras/:cameraId',
-  Similar = '/similar',
+  Similar = '/cameras/:cameraId/similar',
   Promo = '/promo',
   Reviews = '/reviews',
   Coupon = '/coupons',

@@ -12,8 +12,6 @@ export const getCatalogAction = createAsyncThunk<Product[], undefined, ThunkOpti
     const { data } = await api.get<Product[]>(APIRoute.Cameras);
     // for (let i = 0; i < data.length; i++) {
     //const reviews = await api.get<Review[]>(generatePath(APIRoute.Reviews, { cameraId: String(data[i].id) }));
-
-    // data[i].rating = getAverageRate(reviews.data);
     //  }
 
     return data;
@@ -36,5 +34,15 @@ export const getCameraAction = createAsyncThunk<Product, string, ThunkOptions>(
     const { data } = await api.get<Product>(generatePath(APIRoute.Product, { cameraId: cameraId.toString() }));
     return data;
 
+  }
+);
+
+export const getSimilarProductsAction = createAsyncThunk<Product[], string, ThunkOptions>(
+  'data/getSimilarProducts',
+  async (cameraId, { extra: api }) => {
+
+    const { data } = await api.get<Product[]>(generatePath(APIRoute.Similar, { cameraId: cameraId.toString() }));
+
+    return data;
   }
 );
