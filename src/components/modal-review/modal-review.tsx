@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import ErrorPage from '../../pages/error-page/error-page';
 import { postReviewAction } from '../../store/api-actions';
@@ -44,7 +43,7 @@ function ModalReview({onCloseModal, isModalOpened}: ModalReviewProps): JSX.Eleme
     <Modal isModalOpened={isModalOpened} onCloseClick={onCloseModal}>
       <p className="title title--h4">Оставить отзыв</p>
       <div className="form-review">
-        <form method="post" onSubmit={handleSubmit(onSubmit)}>
+        <form method="post" onSubmit={() => handleSubmit(onSubmit)}>
           <div className="form-review__rate">
             <fieldset className="rate form-review__item">
               <legend className="rate__caption">Рейтинг
