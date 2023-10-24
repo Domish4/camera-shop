@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import ErrorPage from '../../pages/error-page/error-page';
 import { postReviewAction } from '../../store/api-actions';
@@ -32,7 +33,6 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
     return <ErrorPage />;
   }
 
-
   const onSubmit = (data: Review) => {
     const cameraId = product.id;
     const rating = Number(data.rating);
@@ -41,7 +41,7 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
   };
   return (
     <div className="form-review" data-testid='form-review'>
-      <form method="post" onSubmit={() => handleSubmit(onSubmit)}>
+      <form method="post" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-review__rate">
           <fieldset className="rate form-review__item">
             <legend className="rate__caption">Рейтинг
