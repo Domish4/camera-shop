@@ -3,7 +3,7 @@ import '../spinner/spinner.css';
 
 function Loader(): JSX.Element {
   return (
-    <section className="catalog">
+    <section className="container">
       <p>Loading ...</p>
       <Spinner />
     </section>

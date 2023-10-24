@@ -4,7 +4,7 @@ import { AppRoute } from '../../utils/const';
 
 function Header(): JSX.Element {
   return (
-    <header className="header" id="header">
+    <header className="header" id="header" data-testid='header-test'>
       <div className="container">
         <Link to={AppRoute.Main} className="header__logo" aria-label="Переход на главную">
           <svg width="100" height="36" aria-hidden="true">
@@ -14,7 +14,7 @@ function Header(): JSX.Element {
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <Link to={AppRoute.Main} className="main-nav__link" >Каталог</Link>
+              <Link to={AppRoute.Catalog} className="main-nav__link" >Каталог</Link>
             </li>
             <li className="main-nav__item">
               <a className="main-nav__link" href="#">Гарантии</a>
@@ -28,11 +28,11 @@ function Header(): JSX.Element {
           </ul>
         </nav>
         <HeaderFormSearch />
-        <a className="header__basket-link" href="#">
+        <Link to={AppRoute.ShopCart} className="header__basket-link">
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
-        </a>
+        </Link>
       </div>
     </header>
   );

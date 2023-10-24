@@ -2,7 +2,7 @@ import { Link, generatePath } from 'react-router-dom';
 import { Product } from '../../types/product-camera-type';
 import { AppRoute } from '../../utils/const';
 import AddItem from '../add-item/add-item';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CSSProperties } from 'react';
 
 
@@ -15,13 +15,17 @@ function ProductCard({camera, style}: ProductCardProps): JSX.Element {
   const { previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, rating, price, id, reviewCount} = camera;
   const [openPopup, setOpenPopup] = useState(false);
 
-  const onClosePopup = () => {
-    setOpenPopup(false);
+  const handleModalShow = useCallback((() => {
+    setOpenPopup(true);
+  }),[]);
 
-  };
+  const handleModalHide = useCallback((() => {
+    setOpenPopup(false);
+  }), []);
+
 
   return (
-    <div className="product-card" style={style}>
+    <div className="product-card" data-testid='product-card' style={style}>
       <div className="product-card__img">
         <picture>
           <source type="image/webp" srcSet={`/${previewImgWebp}, /${previewImgWebp2x} 2x`}/>
@@ -55,10 +59,10 @@ function ProductCard({camera, style}: ProductCardProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <button className="btn btn--purple product-card__btn" type="button" onClick={() => setOpenPopup(true)}>
+        <button className="btn btn--purple product-card__btn" type="button" onClick={handleModalShow}>
           Купить
         </button>
-        {openPopup ? <AddItem camera={camera} onClosePopup={onClosePopup}/> : null}
+        {openPopup ? <AddItem camera={camera} onClosePopup={handleModalHide} isModalOpened={openPopup}/> : null}
         <Link to={generatePath(AppRoute.Product, { id: id.toString() })} className="btn btn--transparent">Подробнее
         </Link>
       </div>

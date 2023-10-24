@@ -6,23 +6,22 @@ import CatalogSort from '../catalog-sort/catalog-sort';
 import Pagination from '../pagination/pagination';
 import ProductCard from '../product-card/product-card';
 import { useParams } from 'react-router-dom';
-import Loader from '../loader/loader';
 
 function Catalog(): JSX.Element {
   const cameras = useAppSelector(getCameras);
   const param = useParams().page;
-  const currentPage = Number(param?.replace(/[^\d]/g, ''));
+  let currentPage = Number(param?.replace(/[^\d]/g, ''));
+
+  if (!currentPage) {
+    currentPage = 1;
+  }
+
   const pageCount = Math.ceil(cameras.length / MAX_CAMERAS_CARD);
   const renderedCameras = cameras.slice((currentPage - 1) * MAX_CAMERAS_CARD, currentPage * MAX_CAMERAS_CARD);
 
-  if (!cameras || !renderedCameras) {
-    return (
-      <Loader />
-    );
-  }
 
   return (
-    <section className="catalog">
+    <section className="catalog" data-testid='catalog-test'>
       <div className="container">
         <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
         <div className="page-content__columns">

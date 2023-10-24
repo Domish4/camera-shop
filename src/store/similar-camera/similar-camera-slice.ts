@@ -9,7 +9,7 @@ export type SimilarProduct = {
   status: Status;
 };
 
-const initialState: SimilarProduct = {
+export const initialState: SimilarProduct = {
   similarProduct: [],
   status: Status.Idle
 };

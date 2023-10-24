@@ -9,7 +9,7 @@ export type CatalogSlice = {
   status: Status;
 };
 
-const initialState: CatalogSlice = {
+export const initialState: CatalogSlice = {
   catalog: [],
   status: Status.Idle
 };

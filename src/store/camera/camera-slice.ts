@@ -9,7 +9,7 @@ export type CameraSlice = {
   status: Status;
 };
 
-const initialState: CameraSlice = {
+export const initialState: CameraSlice = {
   camera: null,
   status: Status.Idle
 };

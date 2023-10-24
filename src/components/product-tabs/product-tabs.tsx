@@ -38,7 +38,7 @@ function ProductTabs({camera}: ProductTabsProps): JSX.Element {
   };
 
   return (
-    <div className="tabs product__tabs">
+    <div className="tabs product__tabs" data-testid='product-tabs'>
       <div className="tabs__controls product__tabs-controls">
         <Link to={'?tab=characteristic'} className={clsx('tabs__control', characteristicOpened && 'is-active')} onClick={() => onCharacteristicButton()} type="button">Характеристики</Link>
         <Link to={'?tab=description'} className={clsx('tabs__control', descriptionOpened && 'is-active')} onClick={() => onDescriptionButton()} type="button">Описание</Link>

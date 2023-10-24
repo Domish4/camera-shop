@@ -9,7 +9,7 @@ export type PromoSlice = {
   status: Status;
 };
 
-const initialState: PromoSlice = {
+export const initialState: PromoSlice = {
   promo: [],
   status: Status.Idle
 };

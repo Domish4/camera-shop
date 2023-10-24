@@ -5,26 +5,28 @@ import ProductTabs from '../../components/product-tabs/product-tabs';
 import ReviewBlock from '../../components/review-block/review-block';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getCameraAction, getSimilarProductsAction } from '../../store/api-actions';
-import { getCamera } from '../../store/camera/camera.selectors';
+import { getCameraAction, getReviewsAction, getSimilarProductsAction } from '../../store/api-actions';
+import { getCamera, getStatus } from '../../store/camera/camera.selectors';
 import Loader from '../../components/loader/loader';
-import { AppRoute } from '../../utils/const';
+import { AppRoute, Status } from '../../utils/const';
 import { getSimilarCameras } from '../../store/similar-camera/similar-camera.selectors';
 import SimilarCards from '../../components/similar-cards/similar-cards';
 
-function ProductCardPage(): JSX.Element {
+function ProductPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const id = useParams().id;
   const cameraId = String(id);
   const camera = useAppSelector(getCamera);
   const similarCameras = useAppSelector(getSimilarCameras);
+  const cameraStatus = useAppSelector(getStatus);
 
   useEffect(() => {
     dispatch(getCameraAction(cameraId));
     dispatch(getSimilarProductsAction(cameraId));
+    dispatch(getReviewsAction(cameraId));
   }, [dispatch, cameraId]);
 
-  if (!camera) {
+  if (!camera || cameraStatus === Status.Loading) {
     return (<Loader />);
   }
 
@@ -34,7 +36,7 @@ function ProductCardPage(): JSX.Element {
     <div className="wrapper">
       <Header />
       <main>
-        <div className="page-content">
+        <div className="page-content" data-testid='product-page'>
           <div className="breadcrumbs">
             <div className="container">
               <ul className="breadcrumbs__list">
@@ -117,4 +119,4 @@ function ProductCardPage(): JSX.Element {
   );
 }
 
-export default ProductCardPage;
+export default ProductPage;

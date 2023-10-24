@@ -4,12 +4,13 @@ export enum NameSpace {
   Camera = 'CAMERA',
   Promo = 'PROMO',
   Catalog = 'CATALOG',
-  Reviews = 'REVIEW',
+  Reviews = 'REVIEWS',
   Coupon = 'COUPON',
   Order = 'ORDER',
   Notification = 'NOTIFICATION',
   Filter = 'FILTER',
-  Similar = 'SIMILAR'
+  Similar = 'SIMILAR',
+  AddReview = 'ADD_REVIEW'
 
 }
 
@@ -26,6 +27,7 @@ export enum AppRoute {
     AddReview = '/reviews',
     Coupon = '/coupons',
     Order = '/orders',
+    ShopCart = '/shopping-cart'
 }
 
 export enum APIRoute {
@@ -33,9 +35,10 @@ export enum APIRoute {
   Product = '/cameras/:cameraId',
   Similar = '/cameras/:cameraId/similar',
   Promo = '/promo',
-  Reviews = '/reviews',
+  Reviews = 'cameras/:cameraId/reviews',
   Coupon = '/coupons',
-  Order = '/orders'
+  Order = '/orders',
+  AddReview = '/reviews'
 }
 
 export const getAverageRate = (reviews: Review[]): number => {
@@ -52,3 +55,10 @@ export enum Status {
   }
 
 export const MAX_CAMERAS_CARD = 9;
+
+export enum KeyCode {
+  Enter = 'Enter',
+  ArrowUp = 'ArrowUp',
+  ArrowDown = 'ArrowDown',
+  Esc = 'Escape'
+}

@@ -18,7 +18,7 @@ function Banner(): JSX.Element {
     <Swiper modules={[Navigation, Pagination, Autoplay]} spaceBetween={50} slidesPerView={1} autoplay={{delay: 3000}} navigation pagination={{ clickable: true }}>
       {promo.map((slideContent, index) => (
         <SwiperSlide key={slideContent.id} virtualIndex={index}>
-          <div className="banner">
+          <div className="banner" data-testid='banner-test'>
             <picture>
               <source type="image/webp" srcSet={`/${slideContent.previewImgWebp}, /${slideContent.previewImgWebp2x} 2x`} />
               <img src={`/${slideContent.previewImg}`} srcSet={`/${slideContent.previewImg2x} 2x`} width="1280" height="280" alt="баннер" />

@@ -1,5 +1,5 @@
 import { Product, PromoProduct, Review } from '../types/product-camera-type';
-import { APIRoute, AppRoute, getAverageRate } from '../utils/const';
+import { APIRoute, AppRoute, } from '../utils/const';
 import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkOptions } from '../types/state';
@@ -8,12 +8,7 @@ import { ThunkOptions } from '../types/state';
 export const getCatalogAction = createAsyncThunk<Product[], undefined, ThunkOptions>(
   'data/getCatalog',
   async (_arg, { extra: api }) => {
-
     const { data } = await api.get<Product[]>(APIRoute.Cameras);
-    // for (let i = 0; i < data.length; i++) {
-    //const reviews = await api.get<Review[]>(generatePath(APIRoute.Reviews, { cameraId: String(data[i].id) }));
-    //  }
-
     return data;
 
   }
@@ -45,4 +40,25 @@ export const getSimilarProductsAction = createAsyncThunk<Product[], string, Thun
 
     return data;
   }
+);
+
+export const getReviewsAction = createAsyncThunk<Review[], string, ThunkOptions>(
+  'data/getReviewss',
+  async (cameraId, { extra: api }) => {
+
+    const { data } = await api.get<Review[]>(generatePath(APIRoute.Reviews, { cameraId: cameraId.toString() }));
+    return data;
+
+  }
+
+);
+
+export const postReviewAction = createAsyncThunk<Review, Review & {onSuccess: (camera: null) => void}, ThunkOptions>(
+  'data/postReview',
+async ({onSuccess, cameraId, userName, advantage, disadvantage, review, rating}, { extra: api}) => {
+  const {data} = await api.post<Review>(`${APIRoute.AddReview}`, {cameraId, userName, advantage, disadvantage, review, rating});
+  onSuccess(null);
+  return data;
+
+},
 );

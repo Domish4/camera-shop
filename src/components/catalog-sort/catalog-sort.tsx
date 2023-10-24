@@ -1,12 +1,12 @@
 function CatalogSort(): JSX.Element {
   return (
-    <div className="catalog-sort">
+    <div className="catalog-sort" data-testid='catalog-sort'>
       <form action="#">
         <div className="catalog-sort__inner">
           <p className="title title--h5">Сортировать:</p>
           <div className="catalog-sort__type">
             <div className="catalog-sort__btn-text">
-              <input type="radio" id="sortPrice" name="sort" checked />
+              <input type="radio" id="sortPrice" name="sort" />
               <label htmlFor="sortPrice">по цене</label>
             </div>
             <div className="catalog-sort__btn-text">
@@ -16,7 +16,7 @@ function CatalogSort(): JSX.Element {
           </div>
           <div className="catalog-sort__order">
             <div className="catalog-sort__btn catalog-sort__btn--up">
-              <input type="radio" id="up" name="sort-icon" checked aria-label="По возрастанию" />
+              <input type="radio" id="up" name="sort-icon" aria-label="По возрастанию" />
               <label htmlFor="up">
                 <svg width="16" height="14" aria-hidden="true">
                   <use xlinkHref="#icon-sort"></use>
