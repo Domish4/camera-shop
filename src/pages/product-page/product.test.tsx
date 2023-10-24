@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../../components/history-router/history-router';
-import { makeFakeCamera, makeFakeCameras, makeFakeReviews } from '../../utils/mocks';
+import { makeFakeAddReview, makeFakeCamera, makeFakeCameras, makeFakeReviews } from '../../utils/mocks';
 import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { NameSpace, Status } from '../../utils/const';
@@ -17,13 +17,24 @@ const mockStore = configureMockStore(middlewares);
 const mockCameras = makeFakeCameras();
 const mockProduct = makeFakeCamera();
 const mockReviews = makeFakeReviews();
+const catalog = makeFakeCameras();
+const addReview = makeFakeAddReview();
+
 
 const store = mockStore({
   [NameSpace.Camera]: {product: mockProduct, status: Status.Success},
   [NameSpace.Similar] : {similarProducts: mockCameras, status: Status.Success},
   [NameSpace.Reviews]: {reviews: mockReviews, status: Status.Success},
-
+  [NameSpace.Catalog]: {
+    catalog: catalog,
+    status: Status.Success
+  },
+  [NameSpace.AddReview]: {
+    AddReview: addReview,
+    status: Status.Success
+  },
 });
+
 
 const history = createMemoryHistory();
 
@@ -38,7 +49,6 @@ describe('Page Product', () => {
         </HistoryRouter>
       </Provider>
     );
-
     expect(screen.getByTestId('product-page')).toBeInTheDocument();
   });
 });

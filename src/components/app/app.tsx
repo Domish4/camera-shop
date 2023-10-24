@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import CatalogMain from '../../pages/catalog-main/catalog-main';
-import ProductCardPage from '../../pages/product-card-page/product-page';
+import ProductCardPage from '../../pages/product-page/product-page';
 import ErrorPage from '../../pages/error-page/error-page';
 import ShoppingCart from '../../pages/shopping-cart/shopping-cart';
 import { HelmetProvider } from 'react-helmet-async';

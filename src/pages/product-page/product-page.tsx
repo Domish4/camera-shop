@@ -20,6 +20,7 @@ function ProductPage(): JSX.Element {
   const similarCameras = useAppSelector(getSimilarCameras);
   const cameraStatus = useAppSelector(getStatus);
 
+
   useEffect(() => {
     dispatch(getCameraAction(cameraId));
     dispatch(getSimilarProductsAction(cameraId));
@@ -35,8 +36,8 @@ function ProductPage(): JSX.Element {
   return (
     <div className="wrapper">
       <Header />
-      <main>
-        <div className="page-content" data-testid='product-page'>
+      <main data-testid="product-page">
+        <div className="page-content">
           <div className="breadcrumbs">
             <div className="container">
               <ul className="breadcrumbs__list">
@@ -60,7 +61,7 @@ function ProductPage(): JSX.Element {
               </ul>
             </div>
           </div>
-          <div className="page-content__section">
+          <div className="page-content__section" >
             <section className="product">
               <div className="container">
                 <div className="product__img">

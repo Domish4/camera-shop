@@ -4,12 +4,14 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../history-router/history-router';
 import ReviewBlock from './review-block';
-import { makeFakeCamera, makeFakeReviews } from '../../utils/mocks';
+import { makeFakeAddReview, makeFakeCamera, makeFakeCameras, makeFakeReviews } from '../../utils/mocks';
 import { NameSpace, Status } from '../../utils/const';
 
 const mockStore = configureMockStore();
 const reviews = makeFakeReviews();
 const camera = makeFakeCamera();
+const catalog = makeFakeCameras();
+const addReview = makeFakeAddReview();
 
 describe('Component: ReviewBlock', () => {
   it('should render correctly', () => {
@@ -22,7 +24,15 @@ describe('Component: ReviewBlock', () => {
       [NameSpace.Camera]: {
         camera: camera,
         status: Status.Success
-      }
+      },
+      [NameSpace.Catalog]: {
+        catalog: catalog,
+        status: Status.Success
+      },
+      [NameSpace.AddReview]: {
+        AddReview: addReview,
+        status: Status.Success
+      },
     });
 
 

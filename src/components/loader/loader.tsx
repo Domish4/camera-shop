@@ -3,10 +3,10 @@ import '../spinner/spinner.css';
 
 function Loader(): JSX.Element {
   return (
-    <section className="container">
+    <div className="container">
       <p>Loading ...</p>
       <Spinner />
-    </section>
+    </div>
   );
 }
 
