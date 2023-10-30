@@ -3,7 +3,7 @@ import '../spinner/spinner.css';
 
 function Loader(): JSX.Element {
   return (
-    <div className="container">
+    <div className="container" data-testid='loader'>
       <p>Loading ...</p>
       <Spinner />
     </div>

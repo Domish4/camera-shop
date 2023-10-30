@@ -3,20 +3,27 @@ import { useAppSelector } from '../../hooks';
 import { getPromo } from '../../store/promo/promo.selectors';
 import { AppRoute } from '../../utils/const';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/bundle';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css/pagination';
+import { Pagination, Autoplay } from 'swiper/modules';
 
 
 function Banner(): JSX.Element {
-  const promo = useAppSelector(getPromo);
+  const promos = useAppSelector(getPromo);
 
-  if (!promo) {
+  if (!promos) {
     return (<div></div>);
   }
   return (
-    <Swiper modules={[Navigation, Pagination, Autoplay]} spaceBetween={50} slidesPerView={1} autoplay={{delay: 3000}} navigation pagination={{ clickable: true }}>
-      {promo.map((slideContent, index) => (
+    <Swiper style={{
+      '--swiper-pagination-bullet-inactive-color': 'white',
+      '--swiper-pagination-bullet-width': '16px',
+      '--swiper-pagination-bullet-height': '16px',
+      '--swiper-pagination-bullet-inactive-opacity': '100',
+      '--swiper-pagination-bullet-horizontal': '100px',
+    }}
+    modules={[Pagination, Autoplay]} width={1500} spaceBetween={50} slidesPerView={1} autoplay={{delay: 3000}} pagination={{ clickable: true}}
+    >
+      {promos.map((slideContent, index) => (
         <SwiperSlide key={slideContent.id} virtualIndex={index}>
           <div className="banner" data-testid='banner-test'>
             <picture>

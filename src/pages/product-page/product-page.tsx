@@ -1,16 +1,19 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductTabs from '../../components/product-tabs/product-tabs';
 import ReviewBlock from '../../components/review-block/review-block';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getCameraAction, getReviewsAction, getSimilarProductsAction } from '../../store/api-actions';
+import { getCameraAction, getReviewsAction, getSimilarProductsAction} from '../../store/api-actions';
 import { getCamera, getStatus } from '../../store/camera/camera.selectors';
 import Loader from '../../components/loader/loader';
-import { AppRoute, Status } from '../../utils/const';
+import { Status } from '../../utils/const';
 import { getSimilarCameras } from '../../store/similar-camera/similar-camera.selectors';
 import SimilarCards from '../../components/similar-cards/similar-cards';
+import ErrorPage from '../error-page/error-page';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import { getSendReviewStatus } from '../../store/review/review.selectors';
 
 function ProductPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -19,17 +22,28 @@ function ProductPage(): JSX.Element {
   const camera = useAppSelector(getCamera);
   const similarCameras = useAppSelector(getSimilarCameras);
   const cameraStatus = useAppSelector(getStatus);
-
+  const postReviewStatus = useAppSelector(getSendReviewStatus);
 
   useEffect(() => {
     dispatch(getCameraAction(cameraId));
     dispatch(getSimilarProductsAction(cameraId));
     dispatch(getReviewsAction(cameraId));
-  }, [dispatch, cameraId]);
+  }, [dispatch, cameraId, postReviewStatus.isSuccess]);
 
-  if (!camera || cameraStatus === Status.Loading) {
+  if (cameraStatus === Status.Error) {
+    return <ErrorPage />;
+  }
+
+  if (!camera) {
     return (<Loader />);
   }
+
+  const handleUpButton = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   const {name, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = camera;
 
@@ -38,29 +52,7 @@ function ProductPage(): JSX.Element {
       <Header />
       <main data-testid="product-page">
         <div className="page-content">
-          <div className="breadcrumbs">
-            <div className="container">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link" href="index.html">Главная
-                    <svg width="5" height="8" aria-hidden="true">
-                      <use xlinkHref="#icon-arrow-mini"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li className="breadcrumbs__item">
-                  <Link to={AppRoute.Main} className="breadcrumbs__link">Каталог
-                    <svg width="5" height="8" aria-hidden="true">
-                      <use xlinkHref="#icon-arrow-mini"></use>
-                    </svg>
-                  </Link>
-                </li>
-                <li className="breadcrumbs__item">
-                  <span className="breadcrumbs__link breadcrumbs__link--active">{name}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <Breadcrumbs name={name}/>
           <div className="page-content__section" >
             <section className="product">
               <div className="container">
@@ -102,19 +94,20 @@ function ProductPage(): JSX.Element {
               </div>
             </section>
           </div>
-          <div className="page-content__section">
-            <SimilarCards similarCameras={similarCameras}/>
-          </div>
+          {similarCameras.length > 0 &&
+            <div className="page-content__section">
+              <SimilarCards similarCameras={similarCameras}/>
+            </div>}
           <div className="page-content__section">
             <ReviewBlock />
           </div>
         </div>
       </main>
-      <a className="up-btn" href="#header">
+      <button className="up-btn" onClick={handleUpButton}>
         <svg width="12" height="18" aria-hidden="true">
           <use xlinkHref="#icon-arrow2"></use>
         </svg>
-      </a>
+      </button>
       <Footer />
     </div>
   );

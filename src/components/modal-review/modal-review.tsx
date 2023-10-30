@@ -1,5 +1,4 @@
 import Modal from '../modal/modal';
-
 import ReviewForm from '../review-form/review-form';
 
 export type ModalReviewProps = {

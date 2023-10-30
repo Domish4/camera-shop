@@ -1,4 +1,3 @@
-import { Review } from '../types/product-camera-type';
 
 export enum NameSpace {
   Camera = 'CAMERA',
@@ -14,12 +13,9 @@ export enum NameSpace {
 
 }
 
-export const tabNames = ['Характеристики', 'Описание'] as const;
-
-
 export enum AppRoute {
     Main = '/',
-    Catalog = '/catalog/:page',
+    Catalog = '/catalog/',
     Product = '/cameras/:id',
     Similar = '/cameras/:cameraId/similar',
     Promo = '/promo',
@@ -41,11 +37,6 @@ export enum APIRoute {
   AddReview = '/reviews'
 }
 
-export const getAverageRate = (reviews: Review[]): number => {
-  const sumRate = reviews.reduce((acc, review) => acc + review.rating, 0);
-
-  return Math.ceil(sumRate / reviews.length);
-};
 
 export enum Status {
     Idle = 'idle',

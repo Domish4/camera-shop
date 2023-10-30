@@ -4,7 +4,7 @@ import { AppRoute } from '../../utils/const';
 import AddItem from '../add-item/add-item';
 import { useCallback, useState } from 'react';
 import { CSSProperties } from 'react';
-
+import { createPortal } from 'react-dom';
 
 export type ProductCardProps = {
   camera: Product;
@@ -62,7 +62,7 @@ function ProductCard({camera, style}: ProductCardProps): JSX.Element {
         <button className="btn btn--purple product-card__btn" type="button" onClick={handleModalShow}>
           Купить
         </button>
-        {openPopup ? <AddItem camera={camera} onClosePopup={handleModalHide} isModalOpened={openPopup}/> : null}
+        {openPopup && createPortal(<AddItem camera={camera} onClosePopup={handleModalHide} isModalOpened={openPopup}/>, document.body)}
         <Link to={generatePath(AppRoute.Product, { id: id.toString() })} className="btn btn--transparent">Подробнее
         </Link>
       </div>

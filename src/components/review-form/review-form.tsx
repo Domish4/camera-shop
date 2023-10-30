@@ -10,7 +10,6 @@ import {useState} from 'react';
 
 export type ReviewFormProps = {
     onCloseModal: () => void;
-
   }
 
 
@@ -107,9 +106,11 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <textarea minLength={5} placeholder="Поделитесь своим опытом покупки" {...register('review', {required: true})}></textarea>
+              <textarea minLength={2} maxLength={160} placeholder="Поделитесь своим опытом покупки" {...register('review', {required: true})}></textarea>
             </label>
             {errors?.review && <div className="custom-textarea__error">Нужно добавить комментарий</div> }
+            {errors.review && errors.review.type === 'maxLength' &&
+              <div className="custom-textarea__error">Вы достигли максимального количества символов</div>}
           </div>
         </div>
         <button className="btn btn--purple form-review__btn" type="submit">Отправить отзыв</button>

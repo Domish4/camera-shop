@@ -1,5 +1,5 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import {render, screen} from '@testing-library/react';
+import {render, screen, waitFor, waitForElementToBeRemoved} from '@testing-library/react';
 import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
 import { createMemoryHistory } from 'history';
@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { NameSpace, Status } from '../../utils/const';
 import ProductPage from './product-page';
-
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -49,6 +48,10 @@ describe('Page Product', () => {
         </HistoryRouter>
       </Provider>
     );
-    expect(screen.getByTestId('product-page')).toBeInTheDocument();
+    waitForElementToBeRemoved(() => expect(screen.getByTestId('loader')));
+
+    waitFor(() => {
+      expect(screen.getByTestId('product-page')).toBeInTheDocument();
+    });
   });
 });

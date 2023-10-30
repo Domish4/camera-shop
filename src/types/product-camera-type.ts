@@ -34,12 +34,3 @@ disadvantage: string;
 review: string;
 rating: number;
 }
-
-export type Coupon = {
-coupon: string;
-}
-
-export type Order = {
-camerasIds: [number];
-coupon: string;
-}

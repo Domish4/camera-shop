@@ -25,7 +25,7 @@ function AddItem({onClosePopup, isModalOpened, camera}: AddItemProps): JSX.Eleme
           <ul className="basket-item__list">
             <li className="basket-item__list-item">
               <span className="basket-item__article">Артикул:</span>
-              <span className="basket-item__number">{vendorCode}</span>
+              <span className="basket-item__number"> {vendorCode}</span>
             </li>
             <li className="basket-item__list-item">{type}</li>
             <li className="basket-item__list-item">{level}</li>

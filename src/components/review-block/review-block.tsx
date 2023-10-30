@@ -1,6 +1,5 @@
-import dayjs from 'dayjs';
 import { useAppSelector } from '../../hooks';
-import { getReviews } from '../../store/review/review.selectors';
+import { getRenderedReviews} from '../../store/review/review.selectors';
 import ReviewCard from '../review-card/review-card';
 import { useState, useCallback } from 'react';
 import ModalReview from '../modal-review/modal-review';
@@ -8,13 +7,11 @@ import ModalReviewSuccess from '../modal-review-success/modal-review-success';
 
 
 function ReviewBlock(): JSX.Element {
-  const reviews = useAppSelector(getReviews);
   const MAX_REVIEWS_COUNT = 3;
   const [reviewsCount, setReviewsCount] = useState(MAX_REVIEWS_COUNT);
-  const sortedReviews = [...reviews].sort((a, b) => dayjs(b.createAt).diff(a.createAt));
+  const sortedReviews = useAppSelector(getRenderedReviews);
 
   const [isModalOpened, setModalOpened] = useState(false);
-
 
   const handleReviewModalShow = useCallback((() => {
     setModalOpened(true);
