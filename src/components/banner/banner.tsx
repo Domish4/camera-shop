@@ -14,15 +14,7 @@ function Banner(): JSX.Element {
     return (<div></div>);
   }
   return (
-    <Swiper style={{
-      '--swiper-pagination-bullet-inactive-color': 'white',
-      '--swiper-pagination-bullet-width': '16px',
-      '--swiper-pagination-bullet-height': '16px',
-      '--swiper-pagination-bullet-inactive-opacity': '100',
-      '--swiper-pagination-bullet-horizontal': '100px',
-    }}
-    modules={[Pagination, Autoplay]} width={1500} spaceBetween={50} slidesPerView={1} autoplay={{delay: 3000}} pagination={{ clickable: true}}
-    >
+    <Swiper modules={[Pagination, Autoplay]} width={1500} spaceBetween={50} slidesPerView={1} autoplay={{delay: 3000}} pagination={{ clickable: true}}>
       {promos.map((slideContent, index) => (
         <SwiperSlide key={slideContent.id} virtualIndex={index}>
           <div className="banner" data-testid='banner-test'>

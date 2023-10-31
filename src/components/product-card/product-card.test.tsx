@@ -3,6 +3,7 @@ import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-router/history-router';
 import { makeFakeCamera } from '../../utils/mocks';
 import ProductCard from './product-card';
+import { random } from 'faker';
 
 
 const mockCamera = makeFakeCamera();
@@ -11,7 +12,7 @@ const history = createMemoryHistory();
 
 const fakeApp = (
   <HistoryRouter history={history}>
-    <ProductCard camera={mockCamera}/>
+    <ProductCard className={random.word()} camera={mockCamera}/>
   </HistoryRouter>
 );
 
