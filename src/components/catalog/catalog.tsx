@@ -31,7 +31,7 @@ function Catalog(): JSX.Element {
             <CatalogSort />
             <div className="cards catalog__cards">
               { renderedCameras.map((camera) =>
-                <ProductCard key={camera.id} camera={camera} />
+                <ProductCard className='product-card' key={camera.id} camera={camera} />
               ) }
             </div>
             {pageCount > 1 && <Pagination currentPage={currentPage} pageCount={pageCount} />}

@@ -3,15 +3,14 @@ import { Product } from '../../types/product-camera-type';
 import { AppRoute } from '../../utils/const';
 import AddItem from '../add-item/add-item';
 import { useCallback, useState } from 'react';
-import { CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 
 export type ProductCardProps = {
   camera: Product;
-  style?: CSSProperties;
+  className: string;
 }
 
-function ProductCard({camera, style}: ProductCardProps): JSX.Element {
+function ProductCard({camera, className}: ProductCardProps): JSX.Element {
   const { previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, rating, price, id, reviewCount} = camera;
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -25,7 +24,7 @@ function ProductCard({camera, style}: ProductCardProps): JSX.Element {
 
 
   return (
-    <div className="product-card" data-testid='product-card' style={style}>
+    <div className={className} data-testid='product-card'>
       <div className="product-card__img">
         <picture>
           <source type="image/webp" srcSet={`/${previewImgWebp}, /${previewImgWebp2x} 2x`}/>

@@ -29,7 +29,7 @@ function SimilarCards({similarCameras}: SimilarProps): JSX.Element {
             {
               similarCameras.map((slide) => (
                 <SwiperSlide key={slide.id}>
-                  <ProductCard style={{display: 'block', width: '100%', margin: '0'}} camera={slide} />
+                  <ProductCard className='similar-card' camera={slide} />
                 </SwiperSlide>
               ))
             }
