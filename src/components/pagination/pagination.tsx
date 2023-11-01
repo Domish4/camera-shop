@@ -58,7 +58,7 @@ function Pagination({ pageCount, currentPage }: PaginationProps): JSX.Element {
             </Link>
           </li>
         ))}
-        {currentPage !== pageCount && (
+        {pageCount <= 3 || currentPage !== pageCount && (
           <li className="pagination__item">
             <Link
               className="pagination__link pagination__link--text"

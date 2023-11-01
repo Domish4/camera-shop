@@ -13,7 +13,6 @@ function Catalog(): JSX.Element {
   const searchParams = new URLSearchParams(location.search);
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const sortedProducts = useAppSelector(getRenderedProducts);
-
   const pageCount = Math.ceil(cameras.length / MAX_CAMERAS_CARD);
 
   const renderedCameras = sortedProducts.slice((currentPage - 1) * MAX_CAMERAS_CARD, currentPage * MAX_CAMERAS_CARD);
