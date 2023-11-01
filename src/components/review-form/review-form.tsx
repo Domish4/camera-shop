@@ -7,6 +7,7 @@ import { Review } from '../../types/product-camera-type';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import {useState} from 'react';
+import { getSendReviewStatus } from '../../store/review/review.selectors';
 
 export type ReviewFormProps = {
     onCloseModal: () => void;
@@ -14,7 +15,7 @@ export type ReviewFormProps = {
 
 
 function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
-
+  const postStatus = useAppSelector(getSendReviewStatus);
   const dispatch = useAppDispatch();
   const product = useAppSelector(getCamera);
   const [rate, setRate] = useState(0);
@@ -36,7 +37,9 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
     const cameraId = product.id;
     const rating = Number(data.rating);
     dispatch(postReviewAction({...data, onSuccess: onCloseModal, cameraId, rating}));
-    reset();
+    if (postStatus.isSuccess) {
+      reset();
+    }
   };
   return (
     <div className="form-review" data-testid='form-review'>
