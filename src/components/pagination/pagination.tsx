@@ -16,7 +16,7 @@ function Pagination({ pageCount, currentPage }: PaginationProps): JSX.Element {
   const getPageNumbers = () => {
     const range = [];
     const minRange = currentPage - 1;
-    const maxRange = currentPage + 1;
+    const maxRange = currentPage + 2;
 
     for (let i = minRange; i <= maxRange; i++) {
       if (i > 0 && i <= pageCount) {

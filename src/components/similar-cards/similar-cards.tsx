@@ -2,7 +2,7 @@ import { Product } from '../../types/product-camera-type';
 import ProductCard from '../product-card/product-card';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css/bundle';
+import './similar-cards.css';
 
 export type SimilarProps = {
   similarCameras: Product[];

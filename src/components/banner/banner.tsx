@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import { getPromo } from '../../store/promo/promo.selectors';
 import { AppRoute } from '../../utils/const';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css/pagination';
+import './banner.css';
 import { Pagination, Autoplay } from 'swiper/modules';
 
 
