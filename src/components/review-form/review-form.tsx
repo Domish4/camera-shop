@@ -31,11 +31,14 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
     return <ErrorPage />;
   }
 
-  const onSubmit = (data: Review) => {
+  const onSubmit = async (data: Review) => {
     const cameraId = product.id;
     const rating = Number(data.rating);
-    dispatch(postReviewAction({...data, onSuccess: onCloseModal, cameraId, rating}));
-    reset();
+    const action = await dispatch(postReviewAction({...data, onSuccess: onCloseModal, cameraId, rating}));
+    if (postReviewAction.fulfilled.match(action)){
+      reset();
+    }
+
   };
   return (
     <div className="form-review" data-testid='form-review'>
