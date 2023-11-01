@@ -37,9 +37,7 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
     const cameraId = product.id;
     const rating = Number(data.rating);
     dispatch(postReviewAction({...data, onSuccess: onCloseModal, cameraId, rating}));
-    if (postStatus.isSuccess) {
-      reset();
-    }
+    reset();
   };
   return (
     <div className="form-review" data-testid='form-review'>
