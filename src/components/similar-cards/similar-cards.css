@@ -289,7 +289,6 @@
   .swiper-navigation-disabled .swiper-button-prev,
   .swiper-navigation-disabled .swiper-button-next {
     display: none !important;
-    pointer-events: none;
   }
   .swiper-button-prev svg,
   .swiper-button-next svg {
@@ -373,7 +372,6 @@
   .swiper-pagination-disabled > .swiper-pagination,
   .swiper-pagination.swiper-pagination-disabled {
     display: none !important;
-    pointer-events: none;
   }
   /* Common Styles */
   .swiper-pagination-fraction,

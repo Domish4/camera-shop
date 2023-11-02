@@ -75,7 +75,11 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <input type="text" placeholder="Введите ваше имя" {...register('userName', {required: true})}/>
+              <input type="text" placeholder="Введите ваше имя" minLength={2} {...register('userName', {required: true, minLength: {
+                value: 2,
+                message: 'Минимальная длина 2 символа'
+              }})}
+              />
             </label>
             {errors?.userName && <p className="custom-input__error">Нужно указать имя</p>}
           </div>
@@ -86,7 +90,11 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <input type="text" placeholder="Основные преимущества товара" {...register('advantage', {required: true})}/>
+              <input type="text" minLength={2} placeholder="Основные преимущества товара" {...register('advantage', {required: true, minLength: {
+                value: 2,
+                message: 'Минимальная длина 2 символа'
+              }})}
+              />
             </label>
             {errors?.advantage && <p className="custom-input__error">Нужно указать достоинства</p> }
           </div>
@@ -97,7 +105,11 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <input type="text" placeholder="Главные недостатки товара" {...register('disadvantage', {required: true})} />
+              <input type="text" minLength={2} placeholder="Главные недостатки товара" {...register('disadvantage', {required: true, minLength: {
+                value: 2,
+                message: 'Минимальная длина 2 символа'
+              }})}
+              />
             </label>
             {errors?.disadvantage && <p className="custom-input__error">Нужно указать недостатки</p> }
           </div>

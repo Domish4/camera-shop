@@ -45,7 +45,7 @@ function ProductPage(): JSX.Element {
     });
   };
 
-  const {name, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = camera;
+  const {name, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, reviewCount} = camera;
 
   return (
     <div className="wrapper">
@@ -81,7 +81,7 @@ function ProductPage(): JSX.Element {
                       <use xlinkHref="#icon-star"></use>
                     </svg>
                     <p className="visually-hidden">Рейтинг: 4</p>
-                    <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>12</p>
+                    <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
                   </div>
                   <p className="product__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
                   <button className="btn btn--purple" type="button">
