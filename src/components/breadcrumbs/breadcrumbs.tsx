@@ -19,13 +19,14 @@ function Breadcrumbs({name}: BreadcrumbsProps): JSX.Element {
             </Link>
           </li>
           <li className="breadcrumbs__item">
-            <Link to={AppRoute.Catalog} className={`breadcrumbs__link ${name ? '' : 'breadcrumbs__link--active'}`}>Каталог
+            <Link to={AppRoute.Catalog} className={`breadcrumbs__link ${name === 'Каталог' ? 'breadcrumbs__link--active' : ''}`}>Каталог
+              { name !== 'Каталог' &&
               <svg width="5" height="8" aria-hidden="true">
                 <use xlinkHref="#icon-arrow-mini"></use>
-              </svg>
+              </svg> }
             </Link>
           </li>
-          {name &&
+          {name !== 'Каталог' &&
                 <li className="breadcrumbs__item">
                   <span className="breadcrumbs__link breadcrumbs__link--active">{name}</span>
                 </li>}

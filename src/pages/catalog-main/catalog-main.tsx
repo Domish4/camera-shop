@@ -23,7 +23,7 @@ function CatalogMain(): JSX.Element {
       <main>
         <Banner />
         <div className="page-content">
-          <Breadcrumbs/>
+          <Breadcrumbs name={'Каталог'}/>
           <Catalog />
         </div>
       </main>

@@ -54,7 +54,7 @@ function ProductCard({camera, className}: ProductCardProps): JSX.Element {
           </p>
         </div>
         <p className="product-card__title">{name}</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price} ₽
+        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru-RU')} ₽
         </p>
       </div>
       <div className="product-card__buttons">

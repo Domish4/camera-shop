@@ -32,7 +32,7 @@ function Modal({ isModalOpened, onCloseClick, children }: ModalProps): JSX.Eleme
   }, [isModalOpened, onEscapeKeydown]);
 
   return (
-    <ReactFocusLock returnFocus disabled={!isModalOpened}>
+    <ReactFocusLock disabled={!isModalOpened}>
       <div
         className={clsx('modal', isModalOpened && 'is-active')}
         ref={modalRef}
