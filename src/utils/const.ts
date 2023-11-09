@@ -53,3 +53,5 @@ export enum KeyCode {
   ArrowDown = 'ArrowDown',
   Esc = 'Escape'
 }
+
+export const DEFAULT_TAB = '?tab=description';

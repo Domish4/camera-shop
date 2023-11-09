@@ -30,7 +30,7 @@ function AddItem({onClosePopup, isModalOpened, camera}: AddItemProps): JSX.Eleme
             <li className="basket-item__list-item">{type}</li>
             <li className="basket-item__list-item">{level}</li>
           </ul>
-          <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
+          <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru-RU')} ₽</p>
         </div>
       </div>
       <div className="modal__buttons">
