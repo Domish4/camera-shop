@@ -7,7 +7,7 @@ type SearchItemProps = {
   onClick: (cameraId: number) => void;
 };
 
-function SearchItem({ camera, isCurrent, onClick }: SearchItemProps): JSX.Element {
+function FormSearchItem({ camera, isCurrent, onClick }: SearchItemProps): JSX.Element {
   const itemRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
@@ -38,4 +38,4 @@ function SearchItem({ camera, isCurrent, onClick }: SearchItemProps): JSX.Elemen
   );
 }
 
-export default SearchItem;
+export default FormSearchItem;

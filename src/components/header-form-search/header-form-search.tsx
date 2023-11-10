@@ -6,8 +6,8 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { AppRoute, KeyCode } from '../../utils/const';
 import useKeyPress from '../../hooks/use-key';
 import { useOutsideClick } from '../../hooks/use-click-outside';
-import SearchItem from './search-item';
 import ReactFocusLock from 'react-focus-lock';
+import FormSearchItem from '../form-search-item/form-search-item';
 
 function HeaderFormSearch(): JSX.Element {
   const [searchValue, setSearchValue] = useState('');
@@ -110,7 +110,7 @@ function HeaderFormSearch(): JSX.Element {
               const isCurrent = i === selectedIndex;
 
               return (
-                <SearchItem
+                <FormSearchItem
                   camera={camera}
                   isCurrent={isCurrent}
                   key={camera.id}
