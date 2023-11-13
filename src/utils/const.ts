@@ -57,3 +57,17 @@ export enum KeyCode {
 export const DEFAULT_TAB = '?tab=description';
 
 
+export enum SortType {
+  Price = 'по цене',
+  Popular = 'по популярности',
+}
+
+export enum SortOrder {
+  UP = 'По возрастанию',
+  Down = 'По убыванию',
+}
+
+export const sortOrderQueryValue = {
+  [SortOrder.UP]: 'up',
+  [SortOrder.Down]: 'down'
+};

@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { getCameras, getRenderedProducts } from '../../store/catalog/catalog.selectors';
+import { getRenderedProducts, getSortedCameras } from '../../store/catalog/catalog.selectors';
 import { MAX_CAMERAS_CARD } from '../../utils/const';
 import CatalogFilter from '../catalog-filter/catalog-filter';
 import CatalogSort from '../catalog-sort/catalog-sort';
@@ -8,14 +8,13 @@ import ProductCard from '../product-card/product-card';
 import { useLocation } from 'react-router-dom';
 
 function Catalog(): JSX.Element {
-  const cameras = useAppSelector(getCameras);
+  const cameras = useAppSelector(getSortedCameras);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
-  const sortedProducts = useAppSelector(getRenderedProducts);
   const pageCount = Math.ceil(cameras.length / MAX_CAMERAS_CARD);
 
-  const renderedCameras = sortedProducts.slice((currentPage - 1) * MAX_CAMERAS_CARD, currentPage * MAX_CAMERAS_CARD);
+  const renderedCameras = cameras.slice((currentPage - 1) * MAX_CAMERAS_CARD, currentPage * MAX_CAMERAS_CARD);
 
 
   return (

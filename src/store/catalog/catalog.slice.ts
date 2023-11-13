@@ -1,19 +1,23 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { getCatalogAction } from '../api-actions';
 import { Product } from '../../types/product-camera-type';
-import { NameSpace, Status } from '../../utils/const';
+import { NameSpace, SortOrder, SortType, Status } from '../../utils/const';
 
 
 export type CatalogSlice = {
   catalog: Product[];
   status: Status;
   currentPage: number | null;
+  sortType: SortType | null;
+  sortOrder: SortOrder | null;
 };
 
 export const initialState: CatalogSlice = {
   catalog: [],
   status: Status.Idle,
-  currentPage: null
+  currentPage: null,
+  sortType: null,
+  sortOrder: null,
 };
 
 export const catalogSlice = createSlice({
@@ -22,7 +26,13 @@ export const catalogSlice = createSlice({
   reducers: {
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
-    }
+    },
+    selectSortType: (state, action: PayloadAction<SortType | null>) => {
+      state.sortType = action.payload;
+    },
+    selectSortOrder: (state, action: PayloadAction<SortOrder | null>) => {
+      state.sortOrder = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -38,3 +48,5 @@ export const catalogSlice = createSlice({
       });
   }
 });
+
+export const {setCurrentPage, selectSortOrder, selectSortType} = catalogSlice.actions;
