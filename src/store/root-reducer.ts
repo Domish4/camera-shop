@@ -13,4 +13,6 @@ export const rootReducer = combineReducers({
   [NameSpace.Camera]: cameraSlice.reducer,
   [NameSpace.Similar]: SimilarProductSlice.reducer,
   [NameSpace.Reviews]: reviewSlice.reducer,
+  [NameSpace.Filter]: catalogSlice.reducer,
+  [NameSpace.Sort]: catalogSlice.reducer,
 });

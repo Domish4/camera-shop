@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { getRenderedProducts, getSortedCameras } from '../../store/catalog/catalog.selectors';
+import { getfilteredCameras } from '../../store/catalog/catalog.selectors';
 import { MAX_CAMERAS_CARD } from '../../utils/const';
 import CatalogFilter from '../catalog-filter/catalog-filter';
 import CatalogSort from '../catalog-sort/catalog-sort';
@@ -8,7 +8,7 @@ import ProductCard from '../product-card/product-card';
 import { useLocation } from 'react-router-dom';
 
 function Catalog(): JSX.Element {
-  const cameras = useAppSelector(getSortedCameras);
+  const cameras = useAppSelector(getfilteredCameras);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
@@ -28,9 +28,9 @@ function Catalog(): JSX.Element {
           <div className="catalog__content">
             <CatalogSort />
             <div className="cards catalog__cards">
-              { renderedCameras.map((camera) =>
+              {renderedCameras.length > 0 ? renderedCameras.map((camera) =>
                 <ProductCard className='product-card' key={camera.id} camera={camera} />
-              ) }
+              ) : <h1 style={{ lineHeight: '30px' }}>Извините, по вашему запросу ничего не найдено </h1>}
             </div>
             {pageCount > 1 && <Pagination currentPage={currentPage} pageCount={pageCount} />}
           </div>

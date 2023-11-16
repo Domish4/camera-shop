@@ -9,7 +9,8 @@ export enum NameSpace {
   Notification = 'NOTIFICATION',
   Filter = 'FILTER',
   Similar = 'SIMILAR',
-  AddReview = 'ADD_REVIEW'
+  AddReview = 'ADD_REVIEW',
+  Sort = 'SORT'
 
 }
 
@@ -70,4 +71,40 @@ export enum SortOrder {
 export const sortOrderQueryValue = {
   [SortOrder.UP]: 'up',
   [SortOrder.Down]: 'down'
+};
+
+export enum LevelProduct {
+  Zero = 'Нулевой',
+  Amateur = 'Любительский',
+  Professional = 'Профессиональный',
+}
+
+export enum ProductType {
+  Collection = 'Коллекционная',
+  Instant = 'Моментальная',
+  Digital = 'Цифровая',
+  Film = 'Плёночная',
+}
+
+export enum CategoryProduct {
+  Videocamera = 'Видеокамера',
+  Photocamera = 'Фотоаппарат',
+}
+
+export const categoryQueryValue = {
+  [CategoryProduct.Videocamera]: 'videocamera',
+  [CategoryProduct.Photocamera]: 'photocamera'
+};
+
+export const typeQueryValue = {
+  [ProductType.Collection]: 'collection',
+  [ProductType.Instant]: 'instant',
+  [ProductType.Digital]: 'digital',
+  [ProductType.Film]: 'film',
+};
+
+export const levelQueryValue = {
+  [LevelProduct.Zero]: 'zero',
+  [LevelProduct.Amateur]: 'amateur',
+  [LevelProduct.Professional]: 'professional'
 };

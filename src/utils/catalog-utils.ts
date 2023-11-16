@@ -1,22 +1,8 @@
 import { Product } from '../types/product-camera-type';
-import { SortOrder, SortType } from './const';
+import { CategoryProduct, LevelProduct, ProductType, SortOrder, SortType } from './const';
 
 export const getSortedProducts = (products: Product[]): Product[] => [...products].sort((a, b) => a.price - b.price);
 
-
-export const getPrice = (cameras: Product[], type: 'max' | 'min'): string => {
-  if (!cameras.length) {
-    return '';
-  }
-
-  const sortedCameras = [...cameras].sort((a, b) => a.price - b.price);
-
-  if (type === 'max' && sortedCameras.length) {
-    return sortedCameras[sortedCameras.length - 1].price.toString();
-  } else {
-    return sortedCameras[0].price.toString();
-  }
-};
 
 export const filterCamerasByPrice = (cameras: Product[], minPrice: number, maxPrice: number): Product[] => {
   if (!minPrice && !maxPrice) {
@@ -62,4 +48,77 @@ export const sortCameras = (cameras: Product[], sortType: SortType | null, sortO
   }
 
   return sortedCamerasByOrder;
+};
+
+export const filterCamerasByCategory = (cameras: Product[], category: CategoryProduct | null): Product[] => {
+  if (!category) {
+    return cameras;
+  }
+  const filteredCameras = cameras.filter((camera) => camera.category === category);
+  return filteredCameras;
+};
+
+
+export const filterCamerasByTypes = (cameras: Product[], types: ProductType[]): Product[] => {
+  if (!types.length) {
+    return cameras;
+  }
+
+  const filteredCameras = cameras.filter((camera) => types.includes(camera.type as ProductType));
+
+  return filteredCameras;
+};
+
+export const filterCamerasByLevels = (cameras: Product[], levels: LevelProduct[]): Product[] => {
+  if (!levels.length) {
+    return cameras;
+  }
+
+  const filteredCameras = cameras.filter((camera) => levels.includes(camera.level as LevelProduct));
+
+  return filteredCameras;
+};
+
+export const getPriceProduct = (cameras: Product[], type: 'max' | 'min'): string => {
+  if (!cameras.length) {
+    return '';
+  }
+
+  const sortedCameras = [...cameras].sort((a, b) => a.price - b.price);
+
+  if (type === 'max' && sortedCameras.length) {
+    return sortedCameras[sortedCameras.length - 1].price.toString();
+  } else {
+    return sortedCameras[0].price.toString();
+  }
+};
+
+export const filterByPrice = (cameras: Product[], minPrice: number, maxPrice: number): Product[] => {
+  if (!minPrice && !maxPrice) {
+    return cameras;
+  }
+
+  if (!maxPrice) {
+    maxPrice = Infinity;
+  }
+
+  const filteredCameras = cameras.filter((camera) => camera.price >= minPrice && camera.price <= maxPrice);
+
+  return filteredCameras;
+};
+
+export const filterCameras = (
+  cameras: Product[],
+  category: CategoryProduct | null,
+  types: ProductType[],
+  levels: LevelProduct[],
+  minPrice: number,
+  maxPrice: number
+): Product[] => {
+  const filteredCamerasByCategory = filterCamerasByCategory(cameras, category);
+  const filteredCamerasByTypes = filterCamerasByTypes(filteredCamerasByCategory, types);
+  const filteredCamerasByLevels = filterCamerasByLevels(filteredCamerasByTypes, levels);
+  const filteredCamerasByPrice = filterCamerasByPrice(filteredCamerasByLevels, minPrice, maxPrice);
+
+  return filteredCamerasByPrice;
 };
