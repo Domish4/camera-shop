@@ -16,7 +16,7 @@ const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const reviews = makeFakeReviews();
 const camera = makeFakeCamera();
-const catalog = makeFakeCameras();
+const mockCameras = makeFakeCameras();
 const addReview = makeFakeAddReview();
 const promo = [makeFakePromo()];
 
@@ -30,9 +30,24 @@ const store = mockStore({
     status: Status.Success
   },
   [NameSpace.Catalog]: {
-    catalog: catalog,
+    catalog: mockCameras,
+    maxPrice: 0,
+    minPrice: 0,
+    sortOrder: null,
+    sortType: null,
+    category: null,
+    types: [],
+    levels: [],
+    currentPage: null,
     status: Status.Success
+
   },
+  [NameSpace.Filter]: {
+    category: null,
+    types: [],
+    levels: [],
+  },
+
   [NameSpace.AddReview]: {
     AddReview: addReview,
     status: Status.Success

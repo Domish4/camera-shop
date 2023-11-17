@@ -17,7 +17,23 @@ const mockStore = configureMockStore(middlewares);
 const mockCameras = makeFakeCameras();
 const mockPromo = makeFakePromo();
 const store = mockStore({
-  [NameSpace.Catalog]: {catalog: mockCameras, status: Status.Success},
+  [NameSpace.Catalog]: {
+    catalog: mockCameras,
+    category: null,
+    types: [],
+    levels: [],
+    minPrice: 0,
+    maxPrice: 0,
+    status: Status.Success
+
+  },
+  [NameSpace.Filter]: {
+    category: null,
+    types: [],
+    levels: [],
+    minPrice: 0,
+    maxPrice: 0,
+  },
   [NameSpace.Promo]: {camera: mockPromo, status: Status.Success}
 });
 

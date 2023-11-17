@@ -1,8 +1,9 @@
+'use client';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentCategory, getCurrentLevels, getCurrentTypes } from '../../store/catalog/catalog.selectors';
 import { changeCategory, changeLevel, changeType, resetFilters } from '../../store/catalog/catalog.slice';
 import { CategoryProduct, LevelProduct, ProductType, categoryQueryValue, levelQueryValue, typeQueryValue } from '../../utils/const';
-import FilterPrice from './catalog-filter-price/catalog-filter-price';
+import FilterPrice from '../catalog-filter-price/catalog-filter-price';
 import {useState, useEffect} from 'react';
 
 function CatalogFilter(): JSX.Element {

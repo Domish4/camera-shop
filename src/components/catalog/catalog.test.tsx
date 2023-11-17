@@ -18,7 +18,21 @@ describe('Component: Catalog', () => {
     const store = mockStore({
       [NameSpace.Catalog]: {
         catalog: mockCameras,
-        status: Status.Success}
+        category: null,
+        types: [],
+        levels: [],
+        minPrice: 0,
+        maxPrice: 0,
+        status: Status.Success
+
+      },
+      [NameSpace.Filter]: {
+        category: null,
+        types: [],
+        levels: [],
+        minPrice: 0,
+        maxPrice: 0,
+      }
     });
 
     render(

@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { getCameras, getCurrentMaxPrice, getCurrentMinPrice, getfilteredCameras } from '../../../store/catalog/catalog.selectors';
-import { setMaxPrice, setMinPrice } from '../../../store/catalog/catalog.slice';
-import { getPriceProduct } from '../../../utils/catalog-utils';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getCameras, getCurrentMaxPrice, getCurrentMinPrice, getfilteredCameras } from '../../store/catalog/catalog.selectors';
+import { setMaxPrice, setMinPrice } from '../../store/catalog/catalog.slice';
+import { getPriceProduct } from '../../utils/catalog-utils';
 import {useState, useEffect, ChangeEvent, KeyboardEvent,} from 'react';
-import { KeyCode } from '../../../utils/const';
+import { KeyCode } from '../../utils/const';
 
 
 export type FilterProps = {
