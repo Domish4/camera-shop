@@ -7,6 +7,7 @@ import { Review } from '../../types/product-camera-type';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import {useState} from 'react';
+import { numberForValidity } from '../../utils/const';
 
 export type ReviewFormProps = {
     onCloseModal: () => void;
@@ -75,7 +76,7 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <input type="text" placeholder="Введите ваше имя" minLength={2} {...register('userName', {required: true, minLength: {
+              <input type="text" placeholder="Введите ваше имя" minLength={numberForValidity.minLength} {...register('userName', {required: true, minLength: {
                 value: 2,
                 message: 'Минимальная длина 2 символа'
               }})}
@@ -90,8 +91,8 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <input type="text" minLength={2} placeholder="Основные преимущества товара" {...register('advantage', {required: true, minLength: {
-                value: 2,
+              <input type="text" minLength={numberForValidity.minLength} placeholder="Основные преимущества товара" {...register('advantage', {required: true, minLength: {
+                value: numberForValidity.minLength,
                 message: 'Минимальная длина 2 символа'
               }})}
               />
@@ -105,8 +106,8 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <input type="text" minLength={2} placeholder="Главные недостатки товара" {...register('disadvantage', {required: true, minLength: {
-                value: 2,
+              <input type="text" minLength={numberForValidity.minLength} placeholder="Главные недостатки товара" {...register('disadvantage', {required: true, minLength: {
+                value: numberForValidity.minLength,
                 message: 'Минимальная длина 2 символа'
               }})}
               />
@@ -120,7 +121,7 @@ function ReviewForm({onCloseModal}: ReviewFormProps): JSX.Element {
                   <use xlinkHref="#icon-snowflake"></use>
                 </svg>
               </span>
-              <textarea minLength={2} maxLength={160} placeholder="Поделитесь своим опытом покупки" {...register('review', {required: true})}></textarea>
+              <textarea minLength={numberForValidity.minLength} maxLength={numberForValidity.maxLength} placeholder="Поделитесь своим опытом покупки" {...register('review', {required: true})}></textarea>
             </label>
             {errors?.review && <div className="custom-textarea__error">Нужно добавить комментарий</div> }
             {errors.review && errors.review.type === 'maxLength' &&

@@ -1,4 +1,5 @@
 'use client';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentCategory, getCurrentLevels, getCurrentTypes } from '../../store/catalog/catalog.selectors';
 import { changeCategory, changeLevel, changeType, resetFilters } from '../../store/catalog/catalog.slice';
@@ -19,33 +20,86 @@ function CatalogFilter(): JSX.Element {
 
   const isVideoCamera = currentCategory === CategoryProduct.Videocamera;
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const searchParam = new URLSearchParams(location.search);
+  const paramsCategory = searchParam.get('category');
+  const paramsType = searchParam.getAll('types');
+
+  const paramsLevel = searchParam.getAll('levels');
+
+  const updateURL = (params: { category?: string | null; types?: ProductType[]; levels?: LevelProduct[] }) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.delete('category');
+    searchParams.delete('types');
+    searchParams.delete('levels');
+
+    if (params.category) {
+      searchParams.append('category', params.category);
+    }
+    if (params.types && params.types.length > 0) {
+      params.types.forEach((type) => searchParams.append('types', type));
+    }
+    if (params.levels && params.levels.length > 0) {
+      params.levels.forEach((level) => searchParams.append('levels', level));
+    }
+
+    navigate(`?${searchParams.toString()}`, { replace: true });
+  };
+
 
   const handleChangeCategory = (category: CategoryProduct) => {
+
     if (currentCategory === category) {
       dispatch(changeCategory(null));
+      updateURL({ category: null });
       return;
     }
     dispatch(changeCategory(category));
-  };
-
-  const handleChangeLevel = (level: LevelProduct) => {
-    dispatch(changeLevel(level));
+    updateURL({ category, levels: currentLevel });
   };
 
   const handleChangeType = (type: ProductType) => {
-    dispatch(changeType(type));
+    const updatedType = currentType.includes(type)
+      ? currentType.filter((item) => item !== type)
+      : [...currentType, type];
+
+    dispatch(changeType(updatedType));
+    updateURL({ types: updatedType, levels: currentLevel, category: currentCategory });
+  };
+
+  const handleChangeLevel = (level: LevelProduct) => {
+    const updatedLevel = currentLevel.includes(level)
+      ? currentLevel.filter((item) => item !== level)
+      : [...currentLevel, level];
+
+    dispatch(changeLevel(updatedLevel));
+    updateURL({ types: currentType, levels: updatedLevel, category: currentCategory });
   };
 
   const handleClickResetFilter = () => {
     setIsReset(true);
     dispatch(resetFilters());
+    updateURL({levels: [], types: [], category: null});
   };
+
+  useEffect(() => {
+    dispatch(changeCategory(paramsCategory as CategoryProduct));
+
+    dispatch(changeType(paramsType as ProductType[]));
+
+    dispatch(changeLevel(paramsLevel as LevelProduct[]));
+
+  }, [dispatch]);
+
 
   useEffect(() => {
     if (isReset) {
       setIsReset(false);
     }
   }, [isReset]);
+
 
   return (
     <div className="catalog-filter" data-testid='catalog-filter'>
@@ -63,8 +117,8 @@ function CatalogFilter(): JSX.Element {
                 <input
                   type="checkbox"
                   name={categoryQueryValue[category]}
-                  checked={currentCategory === category}
-                  onClick={() => handleChangeCategory(category)}
+                  checked={paramsCategory === category}
+                  onChange={() => handleChangeCategory(category)}
                   disabled={category === CategoryProduct.Videocamera && (isFilmType || isInstantType)}
                 />
                 <span className="custom-checkbox__icon"></span>
@@ -82,7 +136,7 @@ function CatalogFilter(): JSX.Element {
                 <input
                   type="checkbox"
                   name={typeQueryValue[type]}
-                  checked={currentType.includes(type)}
+                  checked={paramsType.includes(type)}
                   onChange={() => handleChangeType(type)}
                   disabled={isVideoCamera && (type === ProductType.Instant || type === ProductType.Film)}
                 />
@@ -101,7 +155,7 @@ function CatalogFilter(): JSX.Element {
                 <input
                   type="checkbox"
                   name={levelQueryValue[level]}
-                  checked={currentLevel.includes(level)}
+                  checked={paramsLevel.includes(level)}
                   onChange={() => handleChangeLevel(level)}
                 />
                 <span className="custom-checkbox__icon"></span>

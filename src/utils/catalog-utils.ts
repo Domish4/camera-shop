@@ -1,8 +1,6 @@
 import { Product } from '../types/product-camera-type';
 import { CategoryProduct, LevelProduct, ProductType, SortOrder, SortType } from './const';
 
-export const getSortedProducts = (products: Product[]): Product[] => [...products].sort((a, b) => a.price - b.price);
-
 
 export const filterCamerasByPrice = (cameras: Product[], minPrice: number, maxPrice: number): Product[] => {
   if (!minPrice && !maxPrice) {
@@ -15,8 +13,6 @@ export const filterCamerasByPrice = (cameras: Product[], minPrice: number, maxPr
 
   return cameras.filter((camera) => camera.price >= minPrice && camera.price <= maxPrice);
 };
-
-export const capitalizeFirstLetter = (str: string): string => str[0].toUpperCase() + str.slice(1);
 
 export const sortCameras = (cameras: Product[], sortType: SortType | null, sortOrder: SortOrder | null): Product[] => {
   let sortedCamerasByType: Product[] = [];

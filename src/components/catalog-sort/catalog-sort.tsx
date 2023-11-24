@@ -9,12 +9,15 @@ function CatalogSort(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [isSortTypeSelected, setIsSortTypeSelected] = useState(false);
-
+  const [isSortOrderSelected, setIsSortOrderSelected] = useState(false);
   const currentSortType = useAppSelector(getSelectedSortType);
   const currentSortOrder = useAppSelector(getSelectedSortOrder);
 
-
   const handleClickOnSortType = (text: SortType) => {
+    if (!isSortOrderSelected) {
+      dispatch(selectSortOrder(SortOrder.UP));
+      setIsSortOrderSelected(true);
+    }
     dispatch(selectSortType(text));
     dispatch(setCurrentPage(1));
     setIsSortTypeSelected(true);

@@ -46,23 +46,11 @@ export const catalogSlice = createSlice({
     changeCategory: (state, action: {payload: CategoryProduct | null}) => {
       state.category = action.payload;
     },
-    changeType: (state, action: {payload: ProductType}) => {
-      if (state.types.includes(action.payload)) {
-        state.types = state.types.filter((type) => type !== action.payload);
-
-        return;
-      }
-
-      state.types.push(action.payload);
+    changeType: (state, action: PayloadAction<ProductType[]>) => {
+      state.types = action.payload;
     },
-    changeLevel: (state, action: {payload: LevelProduct}) => {
-      if (state.levels.includes(action.payload)) {
-        state.levels = state.levels.filter((level) => level !== action.payload);
-
-        return;
-      }
-
-      state.levels.push(action.payload);
+    changeLevel: (state, action: PayloadAction<LevelProduct[]>) => {
+      state.levels = action.payload;
     },
     setMinPrice: (state, action: {payload: number}) => {
       state.minPrice = action.payload;

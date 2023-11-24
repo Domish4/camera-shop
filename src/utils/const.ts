@@ -108,3 +108,8 @@ export const levelQueryValue = {
   [LevelProduct.Amateur]: 'amateur',
   [LevelProduct.Professional]: 'professional'
 };
+
+export const numberForValidity = {
+  minLength: 2,
+  maxLength: 160,
+} as const;

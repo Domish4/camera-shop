@@ -22,7 +22,7 @@ export const getSortedCameras = createSelector(
   (cameras, sortType, sortOrder) => sortCameras(cameras, sortType, sortOrder)
 );
 
-export const getfilteredCameras = createSelector(
+export const getFilteredCameras = createSelector(
   [getSortedCameras, getCurrentCategory, getCurrentTypes, getCurrentLevels, getCurrentMinPrice, getCurrentMaxPrice],
   (cameras, category, types, levels, minPrice, maxPrice) => filterCameras(cameras, category, types, levels, minPrice, maxPrice)
 );

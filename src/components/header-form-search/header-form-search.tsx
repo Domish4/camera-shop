@@ -105,7 +105,8 @@ function HeaderFormSearch(): JSX.Element {
               ref={inputRef}
             />
           </label>
-          <ul className={classNames('form-search__select-list', isSearchValid && 'scroller')}>
+          { isSearchValid &&
+          <ul className={classNames('form-search__select-list', searchedCameras.length > 4 && 'scroller')}>
             {searchedCameras.map((camera, i) => {
               const isCurrent = i === selectedIndex;
 
@@ -119,7 +120,7 @@ function HeaderFormSearch(): JSX.Element {
               );
             }
             )}
-          </ul>
+          </ul> }
         </form>
         <button
           className="form-search__reset"
