@@ -40,7 +40,7 @@ function FilterByPrice({ isReset }: FilterProps): JSX.Element {
 
   useEffect(() => {
     if (minPriceValue !== currentMinPrice || maxPriceValue !== currentMaxPrice) {
-      const newParams = new URLSearchParams();
+      const newParams = new URLSearchParams(location.search);
 
       if (minPriceValue !== 0) {
         newParams.set('minPrice', minPriceValue.toString());
