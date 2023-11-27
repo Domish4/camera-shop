@@ -55,9 +55,6 @@ export enum KeyCode {
   Esc = 'Escape'
 }
 
-export const DEFAULT_TAB = '?tab=description';
-
-
 export enum SortType {
   Price = 'по цене',
   Popular = 'по популярности',

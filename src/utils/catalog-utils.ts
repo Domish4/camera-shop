@@ -89,20 +89,6 @@ export const getPriceProduct = (cameras: Product[], type: 'max' | 'min'): string
   }
 };
 
-export const filterByPrice = (cameras: Product[], minPrice: number, maxPrice: number): Product[] => {
-  if (!minPrice && !maxPrice) {
-    return cameras;
-  }
-
-  if (!maxPrice) {
-    maxPrice = Infinity;
-  }
-
-  const filteredCameras = cameras.filter((camera) => camera.price >= minPrice && camera.price <= maxPrice);
-
-  return filteredCameras;
-};
-
 export const filterCameras = (
   cameras: Product[],
   category: CategoryProduct | null,

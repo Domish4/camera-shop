@@ -6,8 +6,6 @@ import { getSortedReviews } from '../../utils/reviews-utils';
 
 
 export const getReviews = (state: State): Review[] => state[NameSpace.Reviews].reviews;
-export const getStatus = (state: State): Status => state[NameSpace.Reviews].status;
-
 export const getAddReviewStatus = (state: State): Status => state[NameSpace.Reviews].postStatus;
 
 export const getSendReviewStatus = createSelector([getAddReviewStatus], (status) => ({

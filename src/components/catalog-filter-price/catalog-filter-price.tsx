@@ -56,7 +56,7 @@ function FilterByPrice({ isReset }: FilterProps): JSX.Element {
 
       navigate({ search: newParams.toString() });
     }
-  }, [minPriceValue, maxPriceValue, currentMinPrice, currentMaxPrice, navigate]);
+  }, [minPriceValue, maxPriceValue, currentMinPrice, currentMaxPrice, navigate, location.search]);
 
   const handleMinPriceInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const price = +evt.target.value < 0 || evt.target.value === '-0' ? '' : evt.target.value;
