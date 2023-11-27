@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentCategory, getCurrentLevels, getCurrentTypes } from '../../store/catalog/catalog.selectors';
 import { changeCategory, changeLevel, changeType, resetFilters } from '../../store/catalog/catalog.slice';
-import { CategoryProduct, LevelProduct, ProductType, categoryQueryValue, levelQueryValue, typeQueryValue } from '../../utils/const';
+import { CategoryProduct, LevelProduct, ProductType, categoryProductName, categoryQueryValue, levelQueryValue, typeQueryValue } from '../../utils/const';
 import FilterPrice from '../catalog-filter-price/catalog-filter-price';
 import {useState, useEffect} from 'react';
 
@@ -50,16 +50,17 @@ function CatalogFilter(): JSX.Element {
 
 
   const handleChangeCategory = (category: CategoryProduct) => {
-
     if (currentCategory === category) {
       dispatch(changeCategory(null));
-      updateURL({ category: null });
+      dispatch(changeType([])); // Сбросить выбранные типы продуктов при снятии выбора категории
+      updateURL({ category: null, types: [] });
       return;
     }
     dispatch(changeCategory(category));
-    updateURL({ category, levels: currentLevel });
+    const updatedType = currentType.filter((type) => !(isVideoCamera && (type === ProductType.Instant || type === ProductType.Film)));
+    dispatch(changeType(updatedType));
+    updateURL({ category, types: updatedType, levels: currentLevel });
   };
-
   const handleChangeType = (type: ProductType) => {
     const updatedType = currentType.includes(type)
       ? currentType.filter((item) => item !== type)
@@ -122,7 +123,7 @@ function CatalogFilter(): JSX.Element {
                   disabled={category === CategoryProduct.Videocamera && (isFilmType || isInstantType)}
                 />
                 <span className="custom-checkbox__icon"></span>
-                <span className="custom-checkbox__label">{category}</span>
+                <span className="custom-checkbox__label">{categoryProductName[category]}</span>
               </label>
             </div>
           )

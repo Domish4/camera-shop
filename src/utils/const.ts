@@ -77,16 +77,21 @@ export enum LevelProduct {
 }
 
 export enum ProductType {
-  Collection = 'Коллекционная',
-  Instant = 'Моментальная',
   Digital = 'Цифровая',
   Film = 'Плёночная',
+  Instant = 'Моментальная',
+  Collection = 'Коллекционная',
 }
 
 export enum CategoryProduct {
-  Videocamera = 'Видеокамера',
   Photocamera = 'Фотоаппарат',
+  Videocamera = 'Видеокамера',
 }
+
+export const categoryProductName = {
+  [CategoryProduct.Photocamera]: 'Фотокамера',
+  [CategoryProduct.Videocamera]: 'Видеокамера'
+};
 
 export const categoryQueryValue = {
   [CategoryProduct.Videocamera]: 'videocamera',
