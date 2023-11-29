@@ -154,7 +154,9 @@ function FilterByPrice({ isReset }: FilterProps): JSX.Element {
     dispatch(setMinPrice(Number(initialMinPrice)));
     dispatch(setMaxPrice(Number(initialMaxPrice)));
 
-  }, [dispatch]);
+  }, [dispatch, initialMaxPrice, initialMinPrice]);
+
+
   return (
     <fieldset className="catalog-filter__block">
       <legend className="title title--h5">Цена, ₽</legend>
