@@ -157,7 +157,7 @@ function FilterByPrice({ isReset }: FilterProps): JSX.Element {
     dispatch(setMinPrice(Number(initialMinPrice)));
     dispatch(setMaxPrice(Number(initialMaxPrice)));
 
-  }, [dispatch,]);
+  }, [dispatch, initialMaxPrice, initialMinPrice]);
 
 
   return (
