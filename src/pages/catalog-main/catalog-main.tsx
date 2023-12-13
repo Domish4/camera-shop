@@ -1,7 +1,7 @@
 import Banner from '../../components/banner/banner';
-import Catalog from '../../components/catalog/catalog';
+import Catalog from '../../components/catalog/catalog/catalog';
 import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
+import Header from '../../components/header/header/header';
 import { useAppDispatch} from '../../hooks';
 import { getCatalogAction, getPromoAction } from '../../store/api-actions';
 import { useEffect } from 'react';

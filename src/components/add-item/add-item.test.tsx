@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { makeFakeCamera } from '../../utils/mocks';
 import AddItem from './add-item';
 import HistoryRouter from '../history-router/history-router';
+import { vi } from 'vitest';
+
 
 const mockStore = configureMockStore();
 const camera = makeFakeCamera();
@@ -12,6 +14,7 @@ let isOpen = true;
 const onClose = () => {
   isOpen = !isOpen;
 };
+
 
 describe('Component: AddCameraModal', () => {
   it('should render correctly', () => {
@@ -25,6 +28,7 @@ describe('Component: AddCameraModal', () => {
             camera={camera}
             isModalOpened={isOpen}
             onClosePopup={onClose}
+            setModalSuccess={vi.fn()}
           />
         </HistoryRouter>
       </Provider>

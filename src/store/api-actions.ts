@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Product, PromoProduct, Review } from '../types/product-camera-type';
-import { APIRoute, AppRoute, } from '../utils/const';
+import { APIRoute, AppRoute, Coupon, } from '../utils/const';
 import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkOptions } from '../types/state';
@@ -87,4 +87,33 @@ async ({onSuccess, cameraId, userName, advantage, disadvantage, review, rating},
     throw err;
   }
 },
+);
+
+export const postDiscount = createAsyncThunk<number, Coupon, ThunkOptions>(
+  'data/postDiscount',
+  async (coupon, { extra: api }) => {
+    try {
+      const { data } = await api.post<number>(APIRoute.Coupon, { coupon });
+      toast.success('Купон активирован');
+      return data;
+    } catch (err) {
+      toast.error('Ошибка применения купона');
+      throw err;
+    }
+  }
+);
+
+export const postOrder = createAsyncThunk<number, { camerasIds: number[]; coupon: Coupon | 0 | null}, ThunkOptions>(
+  'data/postOrder',
+  async ({ camerasIds, coupon }, { extra: api }) => {
+    try {
+      const { data } = await api.post<number>(APIRoute.Order, { camerasIds, coupon });
+      toast.success('Заказ успешно отправлен');
+
+      return data;
+    } catch (err) {
+      toast.error('Ошибка оформления заказа');
+      throw err;
+    }
+  }
 );

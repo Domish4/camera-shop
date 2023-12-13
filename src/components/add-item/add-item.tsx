@@ -1,3 +1,5 @@
+import { useAppDispatch } from '../../hooks';
+import {addProduct } from '../../store/shopping-cart/shopping-cart-slice';
 import { Product } from '../../types/product-camera-type';
 import Modal from '../modal/modal';
 
@@ -5,12 +7,24 @@ export type AddItemProps = {
     onClosePopup: () => void;
     isModalOpened: boolean;
     camera: Product;
+    setModalSuccess: (arg: boolean) => void;
+
 }
 
-function AddItem({onClosePopup, isModalOpened, camera}: AddItemProps): JSX.Element {
+function AddItem({onClosePopup, isModalOpened, camera, setModalSuccess}: AddItemProps): JSX.Element {
   const {previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, vendorCode, type, level, price} = camera;
+  const dispatch = useAppDispatch();
+
+
+  const handleClick = () => {
+    dispatch(addProduct(camera));
+    setModalSuccess(true);
+    onClosePopup();
+  };
+
 
   return (
+
     <Modal isModalOpened={isModalOpened} onCloseClick={onClosePopup}>
       <p className="title title--h4">Добавить товар в корзину</p>
       <div className="basket-item basket-item--short" data-testid='basket-item-modal'>
@@ -34,7 +48,7 @@ function AddItem({onClosePopup, isModalOpened, camera}: AddItemProps): JSX.Eleme
         </div>
       </div>
       <div className="modal__buttons">
-        <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button">
+        <button onClick={handleClick} className="btn btn--purple modal__btn modal__btn--fit-width" type="button">
           <svg width="24" height="16" aria-hidden="true">
             <use xlinkHref="#icon-add-basket"></use>
           </svg>Добавить в корзину
@@ -46,6 +60,8 @@ function AddItem({onClosePopup, isModalOpened, camera}: AddItemProps): JSX.Eleme
         </svg>
       </button>
     </Modal>
+
+
   );
 }
 

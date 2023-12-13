@@ -1,11 +1,11 @@
-import { useAppSelector } from '../../hooks';
-import { getStatus, getFilteredCameras } from '../../store/catalog/catalog.selectors';
-import { MAX_CAMERAS_CARD, Status } from '../../utils/const';
-import CatalogFilter from '../catalog-filter/catalog-filter';
-import CatalogSort from '../catalog-sort/catalog-sort';
-import Loader from '../loader/loader';
-import Pagination from '../pagination/pagination';
-import ProductCard from '../product-card/product-card';
+import { useAppSelector } from '../../../hooks';
+import { getStatus, getFilteredCameras } from '../../../store/catalog/catalog.selectors';
+import { MAX_CAMERAS_CARD, Status } from '../../../utils/const';
+import CatalogFilter from '../../catalog-filter/catalog-filter';
+import CatalogSort from '../../catalog-sort/catalog-sort';
+import Loader from '../../loader/loader';
+import Pagination from '../../pagination/pagination';
+import ProductCard from '../../product-card/product-card';
 import { useLocation } from 'react-router-dom';
 
 function Catalog(): JSX.Element {

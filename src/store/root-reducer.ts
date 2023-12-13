@@ -5,6 +5,7 @@ import { promoSlice } from './promo/promo.slice';
 import { cameraSlice } from './camera/camera-slice';
 import { SimilarProductSlice } from './similar-camera/similar-camera-slice';
 import { reviewSlice } from './review/review-slice';
+import { shoppingCartSlice } from './shopping-cart/shopping-cart-slice';
 
 
 export const rootReducer = combineReducers({
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
   [NameSpace.Reviews]: reviewSlice.reducer,
   [NameSpace.Filter]: catalogSlice.reducer,
   [NameSpace.Sort]: catalogSlice.reducer,
+  [NameSpace.Basket]: shoppingCartSlice.reducer
 });

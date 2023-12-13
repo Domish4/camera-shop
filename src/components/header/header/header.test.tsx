@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import HistoryRouter from '../history-router/history-router';
+import HistoryRouter from '../../history-router/history-router';
 import Header from './header';
-import {makeFakeCameras } from '../../utils/mocks';
-import { NameSpace, Status } from '../../utils/const';
+import {makeFakeCameras } from '../../../utils/mocks';
+import { NameSpace, Status } from '../../../utils/const';
 
 const mockStore = configureMockStore();
 const cameras = makeFakeCameras();
@@ -18,6 +18,15 @@ describe('Component: Header', () => {
         catalog: cameras,
         status: Status.Success
       },
+      [NameSpace.Basket]: {
+        basketCameras: [],
+        totalCount: 0,
+        totalPrice: 0,
+        discount: 0,
+        discountStatus: Status.Success,
+        coupon: 0,
+        orderStatus: Status.Success
+      }
     });
 
     render(

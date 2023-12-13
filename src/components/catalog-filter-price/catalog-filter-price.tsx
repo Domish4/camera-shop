@@ -90,11 +90,18 @@ function FilterByPrice({ isReset }: FilterProps): JSX.Element {
       return;
     }
 
+    if (minPriceValue > maxPriceValue) {
+      setMinPriceValue(maxPriceValue);
+      dispatch(setMinPrice(maxPriceValue));
+      return;
+    }
+
     if (minPriceValue < Number(minPrice)) {
       setMinPriceValue(+minPrice);
       dispatch(setMinPrice(+minPrice));
       return;
     }
+
 
     if (minPriceValue > +maxPrice) {
       setMinPriceValue(+maxPrice);

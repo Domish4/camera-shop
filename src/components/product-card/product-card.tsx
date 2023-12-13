@@ -4,6 +4,9 @@ import { AppRoute } from '../../utils/const';
 import AddItem from '../add-item/add-item';
 import { useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
+import AddItemSuccess from '../add-item-success/add-item-success';
+import { useAppSelector } from '../../hooks';
+import { getShopCartCameras } from '../../store/shopping-cart/shopping-cart-selectors';
 
 export type ProductCardProps = {
   camera: Product;
@@ -13,6 +16,14 @@ export type ProductCardProps = {
 function ProductCard({camera, className}: ProductCardProps): JSX.Element {
   const { previewImgWebp, previewImgWebp2x, previewImg, previewImg2x, name, rating, price, id, reviewCount} = camera;
   const [openPopup, setOpenPopup] = useState(false);
+  const [isAddModalSuccess, setModalSuccess] = useState(false);
+  const shopCartCameras = useAppSelector(getShopCartCameras);
+  const inShoppingCart = shopCartCameras.find((cameras) => cameras.id === camera.id);
+
+
+  const handleAddModalHide = useCallback(() => {
+    setModalSuccess(false);
+  },[]);
 
   const handleModalShow = useCallback((() => {
     setOpenPopup(true);
@@ -58,10 +69,18 @@ function ProductCard({camera, className}: ProductCardProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <button className="btn btn--purple product-card__btn" type="button" onClick={handleModalShow}>
+        { inShoppingCart ?
+          <Link className="btn btn--purple-border" to={AppRoute.ShopCart}>
+            <svg width="16" height="16" aria-hidden="true">
+              <use xlinkHref="#icon-basket"></use>
+            </svg>В корзине
+          </Link>
+          :
+          <button className="btn btn--purple product-card__btn" type="button" onClick={handleModalShow}>
           Купить
-        </button>
-        {openPopup && createPortal(<AddItem camera={camera} onClosePopup={handleModalHide} isModalOpened={openPopup}/>, document.body)}
+          </button> }
+        {openPopup && createPortal(<AddItem setModalSuccess={setModalSuccess} camera={camera} onClosePopup={handleModalHide} isModalOpened={openPopup}/>, document.body)}
+        { isAddModalSuccess && createPortal(<AddItemSuccess isModalOpened={isAddModalSuccess} onCloseModal={handleAddModalHide}/>, document.body)}
         <Link to={generatePath(AppRoute.Product, { id: id.toString() })} className="btn btn--transparent">Подробнее
         </Link>
       </div>

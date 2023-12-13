@@ -17,8 +17,18 @@ describe('Component: SimilarProducts', () => {
       [NameSpace.Similar]: {
         similarCameras: similarCameras,
         status: Status.Idle
+      },
+      [NameSpace.Basket]: {
+        basketCameras: [],
+        totalCount: 0,
+        totalPrice: 0,
+        discount: 0,
+        discountStatus: Status.Success,
+        coupon: 0,
+        orderStatus: Status.Idle
       }
     });
+
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>

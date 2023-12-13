@@ -56,6 +56,15 @@ const store = mockStore({
     promo: promo,
     status: Status.Success
   },
+  [NameSpace.Basket]: {
+    basketCameras: [],
+    totalCount: 0,
+    totalPrice: 0,
+    discount: 0,
+    discountStatus: Status.Success,
+    coupon: 0,
+    orderStatus: Status.Success
+  }
 });
 
 

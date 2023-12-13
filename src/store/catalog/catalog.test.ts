@@ -28,7 +28,7 @@ describe('Reducer: catalogSlice', () => {
         types: [],
         levels: [],
         currentPage: null,
-        status: Status.Success
+        status: Status.Success,
       });
   });
 
@@ -69,7 +69,7 @@ describe('Reducer: catalogSlice', () => {
   });
 
   it('Should change current types by a given type', () => {
-    expect(catalogSlice.reducer(initialState, changeType(ProductType.Digital)))
+    expect(catalogSlice.reducer(initialState, changeType([ProductType.Digital])))
       .toEqual({
         ...initialState,
         types: [ProductType.Digital]
@@ -77,7 +77,7 @@ describe('Reducer: catalogSlice', () => {
   });
 
   it('Should change current levels by a given level', () => {
-    expect(catalogSlice.reducer(initialState, changeLevel(LevelProduct.Amateur)))
+    expect(catalogSlice.reducer(initialState, changeLevel([LevelProduct.Amateur])))
       .toEqual({
         ...initialState,
         levels: [LevelProduct.Amateur]

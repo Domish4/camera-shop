@@ -34,7 +34,16 @@ const store = mockStore({
     minPrice: 0,
     maxPrice: 0,
   },
-  [NameSpace.Promo]: {camera: mockPromo, status: Status.Success}
+  [NameSpace.Promo]: {camera: mockPromo, status: Status.Success},
+  [NameSpace.Basket]: {
+    basketCameras: [],
+    totalCount: 0,
+    totalPrice: 0,
+    discount: 0,
+    discountStatus: Status.Success,
+    coupon: 0,
+    orderStatus: Status.Success
+  }
 });
 
 const history = createMemoryHistory();

@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
-import HeaderFormSearch from '../header-form-search/header-form-search';
-import { AppRoute } from '../../utils/const';
+import HeaderFormSearch from '../../header-form-search/header-form-search';
+import { AppRoute } from '../../../utils/const';
+import { useAppSelector } from '../../../hooks';
+import { getTotalCount } from '../../../store/shopping-cart/shopping-cart-selectors';
 
 function Header(): JSX.Element {
+  const itemsInСart = useAppSelector(getTotalCount);
+
   return (
     <header className="header" id="header" data-testid='header-test'>
       <div className="container">
@@ -32,6 +36,7 @@ function Header(): JSX.Element {
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
+          {itemsInСart > 0 && <span className="header__basket-count">{itemsInСart}</span>}
         </Link>
       </div>
     </header>

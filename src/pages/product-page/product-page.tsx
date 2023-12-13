@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
+import Header from '../../components/header/header/header';
 import ProductTabs from '../../components/product-tabs/product-tabs';
 import ReviewBlock from '../../components/review-block/review-block';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCameraAction, getReviewsAction, getSimilarProductsAction} from '../../store/api-actions';
 import { getCamera, getStatus } from '../../store/camera/camera.selectors';
@@ -14,6 +14,9 @@ import SimilarCards from '../../components/similar-cards/similar-cards';
 import ErrorPage from '../error-page/error-page';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import { getSendReviewStatus } from '../../store/review/review.selectors';
+import { createPortal } from 'react-dom';
+import AddItem from '../../components/add-item/add-item';
+import AddItemSuccess from '../../components/add-item-success/add-item-success';
 
 function ProductPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,6 +26,22 @@ function ProductPage(): JSX.Element {
   const similarCameras = useAppSelector(getSimilarCameras);
   const cameraStatus = useAppSelector(getStatus);
   const postReviewStatus = useAppSelector(getSendReviewStatus);
+  const [openPopup, setOpenPopup] = useState(false);
+  const [isAddModalSuccess, setModalSuccess] = useState(false);
+
+
+  const handleAddModalHide = useCallback(() => {
+    setModalSuccess(false);
+  },[]);
+
+  const handleModalShow = useCallback((() => {
+    setOpenPopup(true);
+  }),[]);
+
+  const handleModalHide = useCallback((() => {
+    setOpenPopup(false);
+  }), []);
+
 
   useEffect(() => {
     dispatch(getCameraAction(cameraId));
@@ -84,11 +103,13 @@ function ProductPage(): JSX.Element {
                     <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
                   </div>
                   <p className="product__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru-RU')} ₽</p>
-                  <button className="btn btn--purple" type="button">
+                  <button className="btn btn--purple" type="button" onClick={handleModalShow}>
                     <svg width="24" height="16" aria-hidden="true">
                       <use xlinkHref="#icon-add-basket"></use>
                     </svg>Добавить в корзину
                   </button>
+                  {openPopup && createPortal(<AddItem setModalSuccess={setModalSuccess} camera={camera} onClosePopup={handleModalHide} isModalOpened={openPopup}/>, document.body)}
+                  { isAddModalSuccess && createPortal(<AddItemSuccess isModalOpened={isAddModalSuccess} onCloseModal={handleAddModalHide}/>, document.body)}
                   <ProductTabs camera={camera} />
                 </div>
               </div>

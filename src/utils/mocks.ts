@@ -1,5 +1,8 @@
 import {datatype, random, image, lorem, name, date} from 'faker';
-import { Product, PromoProduct, Review } from '../types/product-camera-type';
+import { Product, ProductShoppingCart, PromoProduct, Review } from '../types/product-camera-type';
+import { NameSpace, SortOrder, SortType, Status } from './const';
+import { State } from '../types/state';
+import { createEntityAdapter } from '@reduxjs/toolkit';
 
 
 const MOCK_DEFAULT_NUMBER = 1;
@@ -56,3 +59,60 @@ export const makeFakePromo = () : PromoProduct => ({
   previewImgWebp: image.animals(),
   previewImgWebp2x: image.city()
 } as PromoProduct);
+
+
+const productsAdapter = createEntityAdapter<ProductShoppingCart>();
+const mockCameras = makeFakeCameras();
+const mockPromo = [makeFakePromo()];
+const mockProduct = makeFakeCamera();
+const mockReviews = makeFakeReviews();
+
+export const createMockStore = (): State => ({
+  [NameSpace.Basket]: {
+    ...productsAdapter.getInitialState(),
+    basketCameras: [mockProduct],
+    totalCount: 1,
+    totalPrice: 1,
+    discount: 0,
+    discountStatus: Status.Success,
+    coupon: 0,
+    orderStatus: Status.Success
+  },
+  [NameSpace.Catalog]: {catalog: mockCameras,
+    status: Status.Success,
+    sortOrder: SortOrder.UP,
+    sortType: SortType.Price,
+    category: null,
+    types: [],
+    levels: [],
+    minPrice: 0,
+    maxPrice: Infinity,
+    currentPage: null,
+  },
+  [NameSpace.Promo]: {promo: mockPromo, status: Status.Success},
+  [NameSpace.Camera]: {camera: mockProduct, status: Status.Success},
+  [NameSpace.Similar] : {similarProduct: mockCameras, status: Status.Success},
+  [NameSpace.Reviews]: {reviews: mockReviews, status: Status.Success, postStatus: Status.Success, addReview: null},
+  [NameSpace.Filter]: {catalog: mockCameras,
+    status: Status.Success,
+    sortOrder: SortOrder.UP,
+    sortType: SortType.Price,
+    category: null,
+    types: [],
+    levels: [],
+    minPrice: 0,
+    maxPrice: Infinity,
+    currentPage: null,},
+  [NameSpace.Sort]: {
+    catalog: mockCameras,
+    status: Status.Success,
+    sortOrder: SortOrder.UP,
+    sortType: SortType.Price,
+    category: null,
+    types: [],
+    levels: [],
+    minPrice: 0,
+    maxPrice: Infinity,
+    currentPage: null,
+  }
+});

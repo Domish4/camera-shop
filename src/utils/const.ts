@@ -10,7 +10,8 @@ export enum NameSpace {
   Filter = 'FILTER',
   Similar = 'SIMILAR',
   AddReview = 'ADD_REVIEW',
-  Sort = 'SORT'
+  Sort = 'SORT',
+  Basket = 'BASKET',
 
 }
 
@@ -115,3 +116,12 @@ export const numberForValidity = {
   minLength: 2,
   maxLength: 160,
 } as const;
+
+export enum Coupon {
+  First = 'camera-333',
+  Second = 'camera-444',
+  Third = 'camera-555'
+}
+
+export const MIN_PRODUCT = 1;
+export const MAX_PRODUCT = 99;
