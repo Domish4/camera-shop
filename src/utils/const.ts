@@ -1,12 +1,8 @@
-
 export enum NameSpace {
   Camera = 'CAMERA',
   Promo = 'PROMO',
   Catalog = 'CATALOG',
   Reviews = 'REVIEWS',
-  Coupon = 'COUPON',
-  Order = 'ORDER',
-  Notification = 'NOTIFICATION',
   Filter = 'FILTER',
   Similar = 'SIMILAR',
   AddReview = 'ADD_REVIEW',
@@ -19,12 +15,7 @@ export enum AppRoute {
     Main = '/',
     Catalog = '/catalog/',
     Product = '/cameras/:id',
-    Similar = '/cameras/:cameraId/similar',
     Promo = '/promo',
-    Reviews = '/cameras/:cameraId/reviews',
-    AddReview = '/reviews',
-    Coupon = '/coupons',
-    Order = '/orders',
     ShopCart = '/shopping-cart'
 }
 
@@ -125,3 +116,4 @@ export enum Coupon {
 
 export const MIN_PRODUCT = 1;
 export const MAX_PRODUCT = 99;
+export const productsInShopCart = 'LOCAL_STORAGE';

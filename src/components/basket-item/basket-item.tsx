@@ -7,11 +7,11 @@ import { getTotalProductPrice } from '../../utils/basket-utils';
 
 export type BasketItemProps = {
     product: Product;
-    setOpenedRemoveModal?: (arg: boolean) => void;
-    setCurrentProduct?: (camera: Product) => void;
+    onSetOpenedRemoveModal?: (arg: boolean) => void;
+    onSetCurrentProduct?: (camera: Product) => void;
 }
 
-function BasketItem({product, setOpenedRemoveModal, setCurrentProduct}: BasketItemProps): JSX.Element {
+function BasketItem({product, onSetOpenedRemoveModal, onSetCurrentProduct}: BasketItemProps): JSX.Element {
   const {name, vendorCode, category, type, level, price, previewImg, previewImgWebp, previewImg2x, previewImgWebp2x, id, count} = product;
 
 
@@ -38,9 +38,9 @@ function BasketItem({product, setOpenedRemoveModal, setCurrentProduct}: BasketIt
   };
 
   const handleDeleteClick = () => {
-    if (setOpenedRemoveModal && setCurrentProduct) {
-      setOpenedRemoveModal(true);
-      setCurrentProduct(product);
+    if (onSetOpenedRemoveModal && onSetCurrentProduct) {
+      onSetOpenedRemoveModal(true);
+      onSetCurrentProduct(product);
     }
   };
 

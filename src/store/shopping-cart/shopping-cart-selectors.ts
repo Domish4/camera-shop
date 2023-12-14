@@ -5,14 +5,11 @@ import { State } from '../../types/state';
 import { productsAdapter } from './shopping-cart-slice';
 
 export const {
-  selectIds,
-  selectById: selectProductById,
   selectAll: selectAllBasketProducts,
 } = productsAdapter.getSelectors<State>((state) => state[NameSpace.Basket]);
 
 export const getShopCartCameras = (state: State): Product[] => state[NameSpace.Basket].basketCameras;
 export const getTotalCount = (state: State): number => state[NameSpace.Basket].totalCount;
-export const getTotalPrice = (state: State): number => state[NameSpace.Basket].totalPrice;
 export const getDiscountPercent = (state: State): number => state[NameSpace.Basket].discount;
 export const getPostDiscountStatus = (state: State): Status => state[NameSpace.Basket].discountStatus;
 export const getCoupon = (state: State): Coupon | 0 => state[NameSpace.Basket].coupon;

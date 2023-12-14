@@ -19,7 +19,7 @@ function BasketList({productsInBasket}: BasketListProps): JSX.Element {
     <>
       <ul className="basket__list" data-testid='basket-list'>
         {productsInBasket !== undefined &&
-        productsInBasket.map((product) => <BasketItem product={product} key={product.id} setOpenedRemoveModal={setRemoveModalOpened} setCurrentProduct={setCurrentProduct} />
+        productsInBasket.map((product) => <BasketItem product={product} key={product.id} onSetOpenedRemoveModal={setRemoveModalOpened} onSetCurrentProduct={setCurrentProduct} />
         )}
       </ul>
       <BasketRemoveItem

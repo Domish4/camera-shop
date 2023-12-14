@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getCameras } from '../../store/catalog/catalog.selectors';
 import classNames from 'classnames';
@@ -19,9 +19,9 @@ function HeaderFormSearch(): JSX.Element {
 
   const navigate = useNavigate();
 
-  const searchedCameras =
-  cameras.filter((camera) =>
-    camera.name.toLowerCase().includes(searchValue.toLowerCase()));
+  const searchedCameras = useMemo(() =>
+    cameras.filter((camera) =>
+      camera.name.toLowerCase().includes(searchValue.toLowerCase())), [cameras, searchValue]);
 
   const upArrow = useKeyPress({ targetKey: KeyCode.ArrowUp });
   const downArrow = useKeyPress({ targetKey: KeyCode.ArrowDown });

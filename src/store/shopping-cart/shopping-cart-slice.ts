@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { Product, ProductShoppingCart } from '../../types/product-camera-type';
-import { Coupon, NameSpace, Status } from '../../utils/const';
+import { Coupon, NameSpace, Status, productsInShopCart } from '../../utils/const';
 import { getInitialEntityAdapterState, saveToLocalStorage } from '../../utils/local-storage';
 import { postDiscount, postOrder } from '../api-actions';
 
@@ -26,7 +26,7 @@ export const initialState: ShoppingCartSlice = {
 
 export const productsAdapter = createEntityAdapter<ProductShoppingCart>();
 
-const localStorageResult = localStorage.getItem('LOCAL_STORAGE');
+const localStorageResult = localStorage.getItem(productsInShopCart);
 
 const stateWithAdapter = getInitialEntityAdapterState(productsAdapter, initialState, localStorageResult);
 

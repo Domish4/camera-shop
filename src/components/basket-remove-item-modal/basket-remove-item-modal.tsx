@@ -2,7 +2,7 @@ import { useAppDispatch } from '../../hooks';
 import { removeProduct } from '../../store/shopping-cart/shopping-cart-slice';
 import { Product } from '../../types/product-camera-type';
 import Modal from '../modal/modal';
-
+import './basket.css';
 
 export type BasketItemRemoveProps = {
   product: Product;

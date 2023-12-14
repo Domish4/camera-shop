@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks';
 import { getRenderedReviews} from '../../store/review/review.selectors';
 import ReviewCard from '../review-card/review-card';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import ModalReview from '../modal-review/modal-review';
 import ModalReviewSuccess from '../modal-review-success/modal-review-success';
 
@@ -30,8 +30,15 @@ function ReviewBlock(): JSX.Element {
             <button className="btn" type="button" onClick={() => handleReviewModalShow()}>Оставить свой отзыв</button>
           </div>
           <ul className="review-block__list">
-            {sortedReviews.slice(0, reviewsCount).map((review) => <ReviewCard reviewCard={review} key={review.id} />
-            )}
+            {useMemo(() => (sortedReviews
+              .slice(0, reviewsCount)
+              .map((review) => (
+                <ReviewCard
+                  key={review.id}
+                  reviewCard={review}
+                />
+              )
+              )), [reviewsCount, sortedReviews])}
           </ul>
           <div className="review-block__buttons">
             {sortedReviews.length > reviewsCount &&

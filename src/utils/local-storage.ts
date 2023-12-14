@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityId, EntityState } from '@reduxjs/toolkit';
 import { State } from '../types/state';
-import { Status } from './const';
+import { NameSpace, Status, productsInShopCart } from './const';
 
 
 export const getInitialEntityAdapterState = <T, S extends object>(
@@ -22,14 +22,14 @@ export const getInitialEntityAdapterState = <T, S extends object>(
   return adapter.getInitialState<S>(initialState);
 };
 
-export const saveToLocalStorage = (state: State['BASKET']) => {
+export const saveToLocalStorage = (state: State[NameSpace.Basket]) => {
   const data = {
     ...state,
     discount: 0,
     discountStatus: Status.Idle,
     coupon: 0,
     orderStatus: Status.Idle
-  } as State['BASKET'];
-  localStorage.setItem('LOCAL_STORAGE', JSON.stringify(data));
+  } as State[NameSpace.Basket];
+  localStorage.setItem(productsInShopCart, JSON.stringify(data));
 
 };
