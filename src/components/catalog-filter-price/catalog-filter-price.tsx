@@ -113,6 +113,12 @@ function FilterByPrice({ isReset }: FilterProps): JSX.Element {
   };
 
   const checkMaxPrice = () => {
+
+    if (maxPriceValue < minPriceValue) {
+      setMaxPriceValue(minPriceValue);
+      dispatch(setMaxPrice(minPriceValue));
+      return;
+    }
     if (maxPriceValue === null) {
       setMaxPriceValue(0);
       dispatch(setMaxPrice(0));
@@ -125,17 +131,13 @@ function FilterByPrice({ isReset }: FilterProps): JSX.Element {
       return;
     }
 
+
     if (maxPriceValue > +maxPrice) {
       setMaxPriceValue(+maxPrice);
       dispatch(setMaxPrice(+maxPrice));
       return;
     }
 
-    if (maxPriceValue < minPriceValue) {
-      setMaxPriceValue(minPriceValue);
-      dispatch(setMaxPrice(minPriceValue));
-      return;
-    }
 
     dispatch(setMaxPrice(maxPriceValue));
   };

@@ -107,7 +107,7 @@ function BasketItem({product, onSetOpenedRemoveModal, onSetCurrentProduct}: Bask
           </svg>
         </button>
       </div>
-      <div className="basket-item__total-price"><span className="visually-hidden">Общая цена:</span>{getTotalProductPrice(price, count)}</div>
+      <div className="basket-item__total-price"><span className="visually-hidden">Общая цена:</span>{getTotalProductPrice(price, count)} ₽</div>
       <button className="cross-btn" type="button" aria-label="Удалить товар" onClick={handleDeleteClick}>
         <svg width="10" height="10" aria-hidden="true">
           <use xlinkHref="#icon-close"></use>

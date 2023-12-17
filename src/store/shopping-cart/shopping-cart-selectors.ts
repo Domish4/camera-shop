@@ -12,8 +12,10 @@ export const getShopCartCameras = (state: State): Product[] => state[NameSpace.B
 export const getTotalCount = (state: State): number => state[NameSpace.Basket].totalCount;
 export const getDiscountPercent = (state: State): number => state[NameSpace.Basket].discount;
 export const getPostDiscountStatus = (state: State): Status => state[NameSpace.Basket].discountStatus;
-export const getCoupon = (state: State): Coupon | 0 => state[NameSpace.Basket].coupon;
+export const getCoupon = (state: State): Coupon | null => state[NameSpace.Basket].coupon;
 export const getPostOrderStatus = (state: State): Status => state[NameSpace.Basket].orderStatus;
+export const getErrorBasketStatus = (state: State): boolean | null =>
+  state[NameSpace.Basket].isError;
 
 export const getDiscountStatus = createSelector([getPostDiscountStatus], (status) => ({
   isLoading: status === Status.Loading,

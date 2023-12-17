@@ -10,8 +10,9 @@ export type ShoppingCartSlice = {
     totalPrice: number;
     discount: number;
     discountStatus: Status;
-    coupon: Coupon | 0;
+    coupon: Coupon | null;
     orderStatus: Status;
+    isError: boolean | null;
   };
 
 export const initialState: ShoppingCartSlice = {
@@ -20,8 +21,9 @@ export const initialState: ShoppingCartSlice = {
   totalPrice: 0,
   discount: 0,
   discountStatus: Status.Idle,
-  coupon: 0,
-  orderStatus: Status.Idle
+  coupon: null,
+  orderStatus: Status.Idle,
+  isError: null,
 };
 
 export const productsAdapter = createEntityAdapter<ProductShoppingCart>();
@@ -107,7 +109,7 @@ export const shoppingCartSlice = createSlice({
         saveToLocalStorage(state);
       }
     },
-    setCoupon: (state, action: {payload: Coupon}) => {
+    setCoupon: (state, action: {payload: Coupon | null}) => {
       state.coupon = action.payload;
     },
     resetOrderStatus: (state) => {
@@ -116,19 +118,25 @@ export const shoppingCartSlice = createSlice({
     resetBasket() {
       localStorage.removeItem('LOCAL_STORAGE');
       return productsAdapter.getInitialState(initialState);
-    }
+    },
+    setErrorStatus: (state, action: {payload: boolean | null}) => {
+      state.isError = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
       .addCase(postDiscount.pending, (state) => {
         state.discountStatus = Status.Loading;
+        state.isError = null;
       })
       .addCase(postDiscount.fulfilled, (state, action) => {
         state.discount = action.payload;
         state.discountStatus = Status.Success;
+        state.isError = false;
       })
       .addCase(postDiscount.rejected, (state) => {
         state.discountStatus = Status.Error;
+        state.isError = true;
       })
       .addCase(postOrder.pending, (state) => {
         state.orderStatus = Status.Loading;
@@ -137,7 +145,7 @@ export const shoppingCartSlice = createSlice({
         state.basketCameras = [];
         state.totalCount = 0;
         state.discount = 0;
-        state.coupon = 0;
+        state.coupon = null;
         state.orderStatus = Status.Success;
       })
       .addCase(postOrder.rejected, (state) => {
@@ -152,5 +160,6 @@ export const {
   setCameraCount,
   setCoupon,
   resetOrderStatus,
-  resetBasket
+  resetBasket,
+  setErrorStatus
 } = shoppingCartSlice.actions;

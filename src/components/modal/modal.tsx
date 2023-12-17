@@ -19,6 +19,7 @@ function Modal({ isModalOpened, onCloseClick, children }: ModalProps): JSX.Eleme
     }
   }, [onCloseClick]);
 
+
   useEffect(() => {
     if (isModalOpened && modalRef.current) {
       document.body.style.overflow = 'hidden';

@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { Product, PromoProduct, Review } from '../types/product-camera-type';
+import { OrderPost, Product, PromoProduct, Review } from '../types/product-camera-type';
 import { APIRoute, AppRoute, Coupon, } from '../utils/const';
 import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkOptions } from '../types/state';
+import { AppDispatch, ThunkOptions } from '../types/state';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { AxiosInstance } from 'axios';
 
 
 export const getCatalogAction = createAsyncThunk<Product[], undefined, ThunkOptions>(
@@ -92,28 +93,22 @@ async ({onSuccess, cameraId, userName, advantage, disadvantage, review, rating},
 export const postDiscount = createAsyncThunk<number, Coupon, ThunkOptions>(
   'data/postDiscount',
   async (coupon, { extra: api }) => {
-    try {
-      const { data } = await api.post<number>(APIRoute.Coupon, { coupon });
-      toast.success('Купон активирован');
-      return data;
-    } catch (err) {
-      toast.error('Ошибка применения купона');
-      throw err;
-    }
+    const { data } = await api.post<number>(APIRoute.Coupon, { coupon });
+    return data;
   }
 );
 
-export const postOrder = createAsyncThunk<number, { camerasIds: number[]; coupon: Coupon | 0 | null}, ThunkOptions>(
-  'data/postOrder',
-  async ({ camerasIds, coupon }, { extra: api }) => {
-    try {
-      const { data } = await api.post<number>(APIRoute.Order, { camerasIds, coupon });
-      toast.success('Заказ успешно отправлен');
 
-      return data;
-    } catch (err) {
+export const postOrder = createAsyncThunk<void, OrderPost, {
+  dispatch: AppDispatch;
+  extra: AxiosInstance;
+}>(
+  'camera/sendOrderAction',
+  async ({camerasIds, coupon}, {extra: api}) => {
+    try {
+      await api.post(APIRoute.Order, {camerasIds, coupon});
+    }catch {
       toast.error('Ошибка оформления заказа');
-      throw err;
     }
-  }
+  },
 );

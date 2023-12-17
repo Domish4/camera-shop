@@ -47,3 +47,9 @@ export type AddReview = {
   }
 
 export type ProductShoppingCart = Product & { count: number; totalPrice: number }
+
+export type OrderPost = {
+  camerasIds: number[];
+  coupon: string | null;
+}
+
