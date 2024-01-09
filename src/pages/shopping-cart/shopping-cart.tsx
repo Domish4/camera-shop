@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header/header';
 import { AppRoute } from '../../utils/const';
-import BasketList from '../../components/basket-list/basket-list';
-import BasketSummary from '../../components/basket-summary/basket-summary';
+import BasketList from '../../components/basket/basket-list/basket-list';
+import BasketSummary from '../../components/basket/basket-summary/basket-summary';
 import { createPortal } from 'react-dom';
-import ModalProductBasketSuccess from '../../components/basket-success-modal/basket-success-modal';
+import ModalProductBasketSuccess from '../../components/modals/basket-success-modal/basket-success-modal';
 import { getShopCartCameras } from '../../store/shopping-cart/shopping-cart-selectors';
 import { useAppSelector } from '../../hooks';
 

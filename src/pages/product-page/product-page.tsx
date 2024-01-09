@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header/header';
 import ProductTabs from '../../components/product-tabs/product-tabs';
-import ReviewBlock from '../../components/review-block/review-block';
+import ReviewBlock from '../../components/review/review-block/review-block';
 import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCameraAction, getReviewsAction, getSimilarProductsAction} from '../../store/api-actions';
@@ -15,8 +15,8 @@ import ErrorPage from '../error-page/error-page';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import { getSendReviewStatus } from '../../store/review/review.selectors';
 import { createPortal } from 'react-dom';
-import AddItem from '../../components/add-item/add-item';
-import AddItemSuccess from '../../components/add-item-success/add-item-success';
+import AddItem from '../../components/modals/add-item/add-item';
+import AddItemSuccess from '../../components/modals/add-item-success/add-item-success';
 
 function ProductPage(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -1,10 +1,10 @@
 import { Link, generatePath } from 'react-router-dom';
 import { Product } from '../../types/product-camera-type';
 import { AppRoute } from '../../utils/const';
-import AddItem from '../add-item/add-item';
+import AddItem from '../modals/add-item/add-item';
 import { useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
-import AddItemSuccess from '../add-item-success/add-item-success';
+import AddItemSuccess from '../modals/add-item-success/add-item-success';
 import { useAppSelector } from '../../hooks';
 import { getShopCartCameras } from '../../store/shopping-cart/shopping-cart-selectors';
 
