@@ -3,7 +3,7 @@ import { Product, PromoProduct, Review } from '../types/product-camera-type';
 import { APIRoute, Coupon } from '../utils/const';
 import { generatePath } from 'react-router-dom';
 
-const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
+const BACKEND_URL = 'https://camera-shop.accelerator.htmlacademy.pro/';
 const REQUEST_TIMEOUT = 5000;
 
 export const createAPI = (): AxiosInstance => {
